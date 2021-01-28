@@ -6,7 +6,7 @@ namespace Entities.NPC.States
     {
         private float _walkBackToOriginalPositionDst = 0.25f;
         private readonly AIManager _aiManager;
-   
+
         public NormalCustomer_Idle()
         {
             _aiManager = ServiceLocator.Current.Get<AIManager>();

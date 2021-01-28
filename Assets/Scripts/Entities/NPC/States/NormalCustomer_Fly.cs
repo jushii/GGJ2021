@@ -9,8 +9,12 @@ namespace Entities.NPC.States
 
         private Vector3 flyDirection;
         private float stillSpeed = 0.5f;
-        private float flyingSpeed = 10f;
-
+        private float flyingSpeed = 25f;
+        private bool _flyStarted;
+        private float _freezeTimer;
+        // private float _freezeTime = 0.15f;
+        private float _freezeTime = 0.05f;
+        
         public NormalCustomer_Fly()
         {
             _entityManager = ServiceLocator.Current.Get<EntityManager>();
@@ -19,10 +23,11 @@ namespace Entities.NPC.States
 
         public override void OnEnter()
         {
+            _flyStarted = false;
+            _freezeTimer = _freezeTime;
+            
             npc.StopFollowing();
-            npc.aiPath.rvoDensityBehavior.enabled = false; 
-            flyDirection = (npc.transform.position - _entityManager.players[0].transform.position).normalized;
-            npc.rigidbody2D.AddForce(flyDirection.normalized * flyingSpeed, ForceMode2D.Impulse);
+            npc.aiPath.rvoDensityBehavior.enabled = false;
         }
 
         public override void OnExit()
@@ -31,7 +36,19 @@ namespace Entities.NPC.States
 
         public override void OnUpdate()
         {
-            if (npc.rigidbody2D.velocity.magnitude < stillSpeed)
+            if (!_flyStarted)
+            {
+                _freezeTimer -= Time.deltaTime;
+                if (_freezeTimer <= 0)
+                {
+                    _flyStarted = true;
+                    
+                    flyDirection = (npc.transform.position - _entityManager.players[0].transform.position).normalized;
+                    npc.rigidbody2D.AddForce(flyDirection.normalized * flyingSpeed, ForceMode2D.Impulse);
+                }
+            }
+            
+            if (_flyStarted && npc.rigidbody2D.velocity.magnitude < stillSpeed)
             {
                 npc.rigidbody2D.velocity = Vector2.zero;
                 npc.aiPath.rvoDensityBehavior.enabled = true;
