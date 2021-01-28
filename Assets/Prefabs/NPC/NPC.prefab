@@ -94,11 +94,11 @@ GameObject:
   - component: {fileID: 2863207821044162462}
   - component: {fileID: 7843212620631439375}
   - component: {fileID: 9163449290651758}
-  - component: {fileID: 7102628927780708285}
   - component: {fileID: 7429889943119454348}
   - component: {fileID: 4812087437918769657}
   - component: {fileID: 509891453053187830}
   - component: {fileID: -2605118940283464664}
+  - component: {fileID: 4448757960201063968}
   m_Layer: 6
   m_Name: NPC
   m_TagString: Untagged
@@ -225,20 +225,6 @@ MonoBehaviour:
   slowWhenNotFacingTarget: 1
   preventMovingBackwards: 0
   constrainInsideGraph: 1
---- !u!114 &7102628927780708285
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6516432204732116624}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c9679e68a0f1144e79c664d9a11ca121, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  version: 1
-  target: {fileID: 0}
 --- !u!114 &7429889943119454348
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -275,9 +261,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   behaviourType: 1
   aiPath: {fileID: 9163449290651758}
-  aiDestinationSetter: {fileID: 7102628927780708285}
+  aiDestinationSetter: {fileID: 4448757960201063968}
   rvoController: {fileID: 7843212620631439375}
   rigidbody2D: {fileID: -2605118940283464664}
+  aiManager: {fileID: 0}
+  spawnPosition: {x: 0, y: 0, z: 0}
 --- !u!58 &509891453053187830
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -315,3 +303,16 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &4448757960201063968
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6516432204732116624}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94ae50474d9344198312a08aa02a2bd9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetObject: {fileID: 0}

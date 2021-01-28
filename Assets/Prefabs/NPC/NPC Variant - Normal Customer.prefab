@@ -14,10 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   behaviourType: 2
   aiPath: {fileID: 1571143997626298672}
-  aiDestinationSetter: {fileID: 8609974699313207011}
+  aiDestinationSetter: {fileID: 2904950353711302526}
   rvoController: {fileID: 8734148105583898961}
   rigidbody2D: {fileID: 5635585466911776118}
   aiManager: {fileID: 0}
+  spawnPosition: {x: 0, y: 0, z: 0}
 --- !u!1001 &1580021573574871390
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -107,19 +108,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6eb1402c17e84a9282a7f0f62eb584f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &8609974699313207011 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7102628927780708285, guid: aa6dcc2d0c8ec74439c68b2c70ce2f36, type: 3}
-  m_PrefabInstance: {fileID: 1580021573574871390}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5729240286196623310}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c9679e68a0f1144e79c664d9a11ca121, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!50 &5635585466911776118 stripped
 Rigidbody2D:
   m_CorrespondingSourceObject: {fileID: -2605118940283464664, guid: aa6dcc2d0c8ec74439c68b2c70ce2f36, type: 3}
   m_PrefabInstance: {fileID: 1580021573574871390}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2904950353711302526 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4448757960201063968, guid: aa6dcc2d0c8ec74439c68b2c70ce2f36, type: 3}
+  m_PrefabInstance: {fileID: 1580021573574871390}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5729240286196623310}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94ae50474d9344198312a08aa02a2bd9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
