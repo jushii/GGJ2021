@@ -11,7 +11,7 @@
         
         public override void OnEnter()
         {
-            npc.StartFollowing(_entityManager.players[0].transform);
+            // npc.StartFollowing(_entityManager.players[0].transform);
         }
 
         public override void OnExit()
