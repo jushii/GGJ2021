@@ -3,8 +3,10 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    public float maxSpeed;
     public float moveSpeed = 10.0f;
     private Vector2 _inputVector = Vector2.zero;
+    private Vector2 _velocity = Vector2.zero;
     private Rigidbody2D _rb2d;
 
     public float punchHitboxHorizontal = 1f;
@@ -27,9 +29,15 @@ public class Player : MonoBehaviour
         _inputVector = dir;
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
+        _velocity = _inputVector * moveSpeed;
         _rb2d.AddForce(_inputVector * moveSpeed, ForceMode2D.Force);
+        
+        if (_rb2d.velocity.magnitude > maxSpeed)
+        {
+            _rb2d.velocity = Vector2.ClampMagnitude(_rb2d.velocity, maxSpeed);
+        }
     }
 
     public void Punch()
