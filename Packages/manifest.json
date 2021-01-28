@@ -1,5 +1,15 @@
 {
+  "scopedRegistries": [
+    {
+      "name": "A* Pathfinding Project",
+      "url": "https://arongranberg.com/packages/d2a86329ae9583e1b2e42f0f06eb9ccf5b7848cd00112/",
+      "scopes": [
+        "com.arongranberg.astar"
+      ]
+    }
+  ],
   "dependencies": {
+    "com.arongranberg.astar": "4.3.40",
     "com.unity.2d.animation": "5.0.3",
     "com.unity.2d.pixel-perfect": "4.0.1",
     "com.unity.2d.psdimporter": "4.0.2",
