@@ -4,8 +4,6 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public float moveSpeed = 10.0f;
-    
-    private Vector3 _moveDirection = Vector2.zero;
     private Vector2 _inputVector = Vector2.zero;
     private Rigidbody2D _rb2d;
     
@@ -20,11 +18,8 @@ public class Player : MonoBehaviour
         _inputVector = dir;
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
-        _moveDirection = new Vector3(_inputVector.x, _inputVector.y, 0.0f);
-        _moveDirection = transform.TransformDirection(_moveDirection);
-        _moveDirection *= moveSpeed;
-        _rb2d.AddForce(_moveDirection, ForceMode2D.Force);
+        _rb2d.AddForce(_inputVector * moveSpeed, ForceMode2D.Force);
     }
 }
