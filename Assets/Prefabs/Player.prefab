@@ -132,7 +132,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81a8558d2ab550d40a3b44a3ebdd72aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxSpeed: 9
+  maxSpeed: 30.37
+  currentMaxSpeed: 9
   moveSpeed: 80
   punchHitboxHorizontal: 1
   punchHitboxVertical: 5

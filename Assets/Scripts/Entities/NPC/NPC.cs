@@ -13,11 +13,14 @@ public class NPC : MonoBehaviour
     public AIDestinationSetter aiDestinationSetter;
     public RVOController rvoController;
     public Rigidbody2D rigidbody2D;
+    public AIManager aiManager;
     
     private void Start()
     {
         ServiceLocator.Current.Get<EntityManager>().RegisterNPC(this);
-        ServiceLocator.Current.Get<AIManager>().SetupNPC(this);
+
+        aiManager = ServiceLocator.Current.Get<AIManager>();
+        aiManager.SetupNPC(this);
     }
 
     public void StartFollowing(Transform target)
@@ -31,4 +34,6 @@ public class NPC : MonoBehaviour
         aiPath.canMove = false;
         aiDestinationSetter.target = null;
     }
+
+    public virtual void OnPunch() { }
 }
