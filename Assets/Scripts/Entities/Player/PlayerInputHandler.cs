@@ -28,7 +28,7 @@ public class PlayerInputHandler : MonoBehaviour
 
     public void OnLightPunch(InputAction.CallbackContext context)
     {
-        Debug.Log("punch");
+        _player.Punch();
     }
 
     // public void OnMove()

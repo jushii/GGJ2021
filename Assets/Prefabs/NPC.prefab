@@ -276,6 +276,8 @@ MonoBehaviour:
   behaviourType: 1
   aiPath: {fileID: 9163449290651758}
   aiDestinationSetter: {fileID: 7102628927780708285}
+  rvoController: {fileID: 7843212620631439375}
+  rigidbody2D: {fileID: -2605118940283464664}
 --- !u!58 &509891453053187830
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -305,7 +307,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0
+  m_LinearDrag: 2
   m_AngularDrag: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}
