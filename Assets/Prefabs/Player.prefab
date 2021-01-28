@@ -133,6 +133,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 100
+  punchHitboxHorizontal: 1
+  punchHitboxVertical: 5
+  xOffset: 0.5
 --- !u!58 &-847529158448041522
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -199,22 +202,6 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: -3800696264523675774}
         m_TargetAssemblyTypeName: PlayerInputHandler, Assembly-CSharp
-        m_MethodName: OnTeleport
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: da5efce7-0b41-45bb-9a3c-2c57823845bf
-    m_ActionName: Player/Teleport[/XInputControllerWindows/rightTrigger,/Mouse/leftButton]
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: -3800696264523675774}
-        m_TargetAssemblyTypeName: PlayerInputHandler, Assembly-CSharp
         m_MethodName: OnMove
         m_Mode: 0
         m_Arguments:
@@ -227,6 +214,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 95b1132d-6ff5-477d-84f7-a6167b32f20e
     m_ActionName: Player/Move[/Keyboard/upArrow,/Keyboard/downArrow,/Keyboard/leftArrow,/Keyboard/rightArrow]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: -3800696264523675774}
+        m_TargetAssemblyTypeName: PlayerInputHandler, Assembly-CSharp
+        m_MethodName: OnLightPunch
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 5b6d9b9f-5be9-4b85-b41c-113eb034f6cd
+    m_ActionName: Player/LightPunch[/Keyboard/space,/XInputControllerWindows/buttonSouth,/XInputControllerWindows/buttonSouth]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -245,7 +248,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _player: {fileID: -8898905427860294693}
-  _playerInput: {fileID: 4460510628813002074}
 --- !u!1 &6884313133180417992
 GameObject:
   m_ObjectHideFlags: 0
