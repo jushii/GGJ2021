@@ -20,8 +20,9 @@ namespace Entities.NPC.States
         public override void OnEnter()
         {
             npc.StopFollowing();
-            flyDirection = npc.transform.position - _entityManager.players[0].transform.position;
-            npc.GetComponent<Rigidbody2D>().AddForce(flyDirection.normalized * flyingSpeed, ForceMode2D.Impulse);
+            npc.aiPath.rvoDensityBehavior.enabled = false; 
+            flyDirection = (npc.transform.position - _entityManager.players[0].transform.position).normalized;
+            npc.rigidbody2D.AddForce(flyDirection.normalized * flyingSpeed, ForceMode2D.Impulse);
         }
 
         public override void OnExit()
@@ -30,8 +31,10 @@ namespace Entities.NPC.States
 
         public override void OnUpdate()
         {
-            if(npc.gameObject.GetComponent<Rigidbody2D>().velocity.magnitude < stillSpeed)
+            if (npc.rigidbody2D.velocity.magnitude < stillSpeed)
             {
+                npc.rigidbody2D.velocity = Vector2.zero;
+                npc.aiPath.rvoDensityBehavior.enabled = true;
                 _aiManager.ChangeState(npc, typeof(Consumer_MoveToTarget));
             }
         }
