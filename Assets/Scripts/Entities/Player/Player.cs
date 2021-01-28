@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -42,5 +43,11 @@ public class Player : MonoBehaviour
             //Debug.Log("punch!");
             ServiceLocator.Current.Get<AIManager>().ChangeState(collider.GetComponent<NPC>(), typeof(Entities.NPC.States.Consumer_Fly));
         }
+    }
+
+    private void OnDrawGizmos()
+    {
+        // Gizmos.color = Color.red;
+        // Gizmos.DrawWireCube(transform.position + new Vector3(_inputVector.x, _inputVector.y, 0.0f) * xOffset, Vector3.one * 1.0f);
     }
 }
