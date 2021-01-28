@@ -46,6 +46,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81a8558d2ab550d40a3b44a3ebdd72aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  punchCircleRadius: 1
+  punchCircleOffset: 0.5
 --- !u!58 &-847529158448041522
 CircleCollider2D:
   m_ObjectHideFlags: 0

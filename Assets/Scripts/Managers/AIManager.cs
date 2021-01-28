@@ -17,6 +17,7 @@ public class AIManager :  MonoBehaviour, IGameService
         consumer.startingState = typeof(Consumer_Idle);
         consumer.availableStates.Add(typeof(Consumer_Idle));
         consumer.availableStates.Add(typeof(Consumer_MoveToTarget));
+        consumer.availableStates.Add(typeof(Consumer_Fly));
 
         _generationParameters.Add(NPC_BehaviourType.Consumer, consumer);
     }
