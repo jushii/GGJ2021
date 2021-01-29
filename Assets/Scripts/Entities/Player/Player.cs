@@ -1,6 +1,20 @@
 using System;
+using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
+
+public enum LookDirection
+{
+    Right,
+    TopRight,
+    Top,
+    TopLeft,
+    Left,
+    BottomLeft,
+    Bottom,
+    BottomRight,
+    None,
+}
 
 public class Player : MonoBehaviour
 {
@@ -22,14 +36,24 @@ public class Player : MonoBehaviour
     private Collider2D[] punchedNPCs = new Collider2D[10];
     private Collider2D[] nearbyNPCs = new Collider2D[5];
     private LayerMask mask;
-    private Vector3 point;
-    private Vector2 size;
     private int _punchFrameTime = 2;
     private int _punchFrameTimer;
+
+    private Animator _animator;
+    private AnimatorControllerParameter _tmpParameter;
+    private List<int> _cachedParameterIds = new List<int>();
+
+    private float _lookAngle = 0.0f;        // player's looking direction angle in radian ranged from 0 to 2*Pi
+    private float _angleDivider = 45.0f;
+    private LookDirection _lookDirection = LookDirection.Right;
+
 
     private void Start()
     {
         ServiceLocator.Current.Get<EntityManager>().RegisterPlayer(this);
+
+        _animator = GetComponent<Animator>();
+        CacheAnimatorParameterIds();
     }
 
     public void SetInputVector(Vector2 dir)
@@ -39,6 +63,10 @@ public class Player : MonoBehaviour
         if (dir.magnitude != 0.0f)
         {
             _lookVector = _inputVector;
+        }
+        else
+        {
+            _lookVector = Vector2.zero;
         }
     }
 
@@ -61,9 +89,6 @@ public class Player : MonoBehaviour
         _punchFrameTimer = _punchFrameTime;
         
         mask = 1 << LayerMask.NameToLayer("NPC");
-        // point = transform.position + transform.right * (punchHitboxHorizontal/2 + punchHitBoxOffset);
-        // size = new Vector2(punchHitboxHorizontal, punchHitboxVertical);
-        // punchedNPCs = Physics2D.OverlapCapsuleAll(point, size, CapsuleDirection2D.Horizontal, 0f, mask);
         Vector2 playerPos2D = new Vector2(transform.position.x, transform.position.y);
         float angle = Vector2.Angle(playerPos2D, playerPos2D + _lookVector);
         
@@ -114,10 +139,65 @@ public class Player : MonoBehaviour
         _punchFrameTimer = Mathf.Clamp(_punchFrameTimer - 1, 0, _punchFrameTime);
     }
 
+    public void RunAnimation()
+    {
+        _animator = GetComponent<Animator>();
+        if(_lookVector != Vector2.zero)
+        {
+            _lookAngle = Mathf.Acos(Vector2.Dot(Vector2.right, _lookVector) / _lookVector.magnitude);
+            if(_lookVector.y < 0)
+            {
+                _lookAngle = 2 * Mathf.PI - _lookAngle;
+            }
+
+            _lookDirection = (LookDirection) Mathf.RoundToInt(_lookAngle * Mathf.Rad2Deg / _angleDivider);
+        }
+        else
+        {
+            _lookDirection = LookDirection.None;
+        }
+
+        //Debug.Log(_lookDirection);
+        switch (_lookDirection)
+        {
+            case LookDirection.Left:
+                ResetAnimatorTriggers();
+                _animator.SetTrigger("RunLeft");
+                break;
+            case LookDirection.Right:
+                ResetAnimatorTriggers();
+                _animator.SetTrigger("RunRight");
+                break;
+            case LookDirection.None:
+                ResetAnimatorTriggers();
+                _animator.SetTrigger("Idle");
+                break;
+        }
+    }
+
+    private void CacheAnimatorParameterIds()
+    {
+        for (int i = 0; i < _animator.parameters.Length; i++)
+        {
+            _tmpParameter = _animator.parameters[i];
+            if (_tmpParameter.type == AnimatorControllerParameterType.Trigger)
+            {
+                _cachedParameterIds.Add(Animator.StringToHash(_tmpParameter.name));
+            }
+        }
+    }
+
+    private void ResetAnimatorTriggers()
+    {
+        foreach (int id in _cachedParameterIds)
+        {
+            _animator.ResetTrigger(id);
+        }
+    }
+
     private void OnDrawGizmos()
     {
-        // Gizmos.color = Color.red;
-
-        // Gizmos.DrawWireCube(transform.position + new Vector3(_lookVector.x, _lookVector.y, 0.0f) * punchHitBoxOffset, Vector3.one * 2.0f);
+        //Gizmos.color = Color.red;
+        //Gizmos.DrawWireCube(transform.position + new Vector3(_lookVector.x, _lookVector.y, 0.0f) * punchHitBoxOffset, Vector3.one * 2.0f);
     }
 }

@@ -12,6 +12,7 @@ public class PlayerInputHandler : MonoBehaviour
 
     public void OnMove(InputAction.CallbackContext context)
     {
-        _player.SetInputVector(context.ReadValue<Vector2>());    
+        _player.SetInputVector(context.ReadValue<Vector2>());
+        _player.RunAnimation();
     }
 }

@@ -128,6 +128,7 @@ GameObject:
   - component: {fileID: -2721954749470373811}
   - component: {fileID: 4460510628813002074}
   - component: {fileID: -3800696264523675774}
+  - component: {fileID: 8116723846520295258}
   m_Layer: 7
   m_Name: Player
   m_TagString: Untagged
@@ -284,6 +285,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _player: {fileID: -8898905427860294693}
+--- !u!95 &8116723846520295258
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5886625504721911517}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: cc22bed132ab9b24ebd623b287553a7e, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &6884313133180417992
 GameObject:
   m_ObjectHideFlags: 0
@@ -295,7 +315,7 @@ GameObject:
   - component: {fileID: 6761749885065746005}
   - component: {fileID: 7424964219103647360}
   m_Layer: 7
-  m_Name: Capsule
+  m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -355,7 +375,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -9095717837082945937, guid: 34587324d412940a79d530020c957dc0, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 853ae4dd0f10d104693a043a527d7897, type: 3}
   m_Color: {r: 0.9960785, g: 0.4156863, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
