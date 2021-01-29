@@ -9,7 +9,7 @@
             _aiManager = ServiceLocator.Current.Get<AIManager>();
         }
         
-        public override void OnEnter()
+        public override void OnEnter(object args = null)
         {
         }
 

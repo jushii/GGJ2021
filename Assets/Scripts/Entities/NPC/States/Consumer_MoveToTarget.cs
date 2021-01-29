@@ -12,7 +12,7 @@ namespace Entities.NPC.States
             _entityManager = ServiceLocator.Current.Get<EntityManager>();
         }
         
-        public override void OnEnter()
+        public override void OnEnter(object args = null)
         {
             _isFollowing = false;
         }

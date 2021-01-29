@@ -22,7 +22,7 @@ public class Player : MonoBehaviour
     public float currentMaxSpeed;
     public float moveSpeed = 10.0f;
     private Vector2 _inputVector = Vector2.zero;
-    private Vector2 _lookVector = Vector2.zero;
+    public Vector2 lookVector = Vector2.zero;
     private Vector2 _velocity = Vector2.zero;
     public Rigidbody2D _rb2d;
     public Camera camera;
@@ -38,7 +38,7 @@ public class Player : MonoBehaviour
     private LayerMask mask;
     private int _punchFrameTime = 2;
     private int _punchFrameTimer;
-
+    
     private Animator _animator;
     private AnimatorControllerParameter _tmpParameter;
     private List<int> _cachedParameterIds = new List<int>();
@@ -46,7 +46,7 @@ public class Player : MonoBehaviour
     private float _lookAngle = 0.0f;        // player's looking direction angle in radian ranged from 0 to 2*Pi
     private float _angleDivider = 45.0f;
     private LookDirection _lookDirection = LookDirection.Right;
-
+    private List<Kid> _followers = new List<Kid>();
 
     private void Start()
     {
@@ -62,11 +62,11 @@ public class Player : MonoBehaviour
 
         if (dir.magnitude != 0.0f)
         {
-            _lookVector = _inputVector;
+            lookVector = _inputVector;
         }
         else
         {
-            _lookVector = Vector2.zero;
+            lookVector = Vector2.zero;
         }
     }
 
@@ -90,14 +90,12 @@ public class Player : MonoBehaviour
         
         mask = 1 << LayerMask.NameToLayer("NPC");
         Vector2 playerPos2D = new Vector2(transform.position.x, transform.position.y);
-        float angle = Vector2.Angle(playerPos2D, playerPos2D + _lookVector);
+        float angle = Vector2.Angle(playerPos2D, playerPos2D + lookVector);
         
-        int punchedNpcCount = Physics2D.OverlapBoxNonAlloc(playerPos2D + new Vector2(_lookVector.x, _lookVector.y) * punchHitBoxOffset, Vector2.one * 2.5f, angle, punchedNPCs, mask);
+        int punchedNpcCount = Physics2D.OverlapBoxNonAlloc(playerPos2D + new Vector2(lookVector.x, lookVector.y) * punchHitBoxOffset, Vector2.one * 2.5f, angle, punchedNPCs, mask);
 
         if (punchedNpcCount > 0)
         {
-            // _rb2d.MovePosition(playerPos2D + _lookVector * 0.1f);
-
             for (int i = 0; i < punchedNpcCount; i++)
             {
                 if (punchedNPCs[i].TryGetComponent(out NPC npc))
@@ -105,12 +103,6 @@ public class Player : MonoBehaviour
                     npc.OnPunch();
                 }
             }
-
-            // _cameraShakeTween?.Kill();
-            // _cameraShakeTween = camera.transform.DOShakePosition(0.25f, Vector3.one * 0.025f, 1, 50.0f, false, true).OnKill(() =>
-            // {
-            //     camera.transform.localPosition = Vector3.zero;
-            // });
         }
     }
 
@@ -142,10 +134,10 @@ public class Player : MonoBehaviour
     public void RunAnimation()
     {
         _animator = GetComponent<Animator>();
-        if(_lookVector != Vector2.zero)
+        if(lookVector != Vector2.zero)
         {
-            _lookAngle = Mathf.Acos(Vector2.Dot(Vector2.right, _lookVector) / _lookVector.magnitude);
-            if(_lookVector.y < 0)
+            _lookAngle = Mathf.Acos(Vector2.Dot(Vector2.right, lookVector) / lookVector.magnitude);
+            if(lookVector.y < 0)
             {
                 _lookAngle = 2 * Mathf.PI - _lookAngle;
             }
@@ -199,5 +191,22 @@ public class Player : MonoBehaviour
     {
         //Gizmos.color = Color.red;
         //Gizmos.DrawWireCube(transform.position + new Vector3(_lookVector.x, _lookVector.y, 0.0f) * punchHitBoxOffset, Vector3.one * 2.0f);
+    }
+
+    public void AddFollower(Kid kid)
+    {
+        _followers.Add(kid);
+    }
+    
+    public Transform GetKidFollowTarget(Kid kidRequestingFollowTarget)
+    {
+        int kidIndex = _followers.IndexOf(kidRequestingFollowTarget);
+
+        if (kidIndex == 0)
+        {
+            return transform;
+        }
+
+        return _followers[kidIndex - 1].transform;
     }
 }

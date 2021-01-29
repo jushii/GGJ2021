@@ -25,8 +25,14 @@ public class AIManager :  MonoBehaviour, IGameService
         normalCustomer.availableStates.Add(typeof(NormalCustomer_Fly));
         normalCustomer.availableStates.Add(typeof(NormalCustomer_WalkToSpawnPosition));
 
+        NPC_GenerationParameters kid = new NPC_GenerationParameters();
+        kid.startingState = typeof(Kid_Idle);
+        kid.availableStates.Add(typeof(Kid_Idle));
+        kid.availableStates.Add(typeof(Kid_FollowPlayer));
+
         _generationParameters.Add(NPC_BehaviourType.Consumer, consumer);
         _generationParameters.Add(NPC_BehaviourType.NormalCustomer, normalCustomer);
+        _generationParameters.Add(NPC_BehaviourType.Kid, kid);
     }
 
     public void SetupNPC(NPC npc)
@@ -49,9 +55,9 @@ public class AIManager :  MonoBehaviour, IGameService
         npc.state.OnEnter();
     }
 
-    public void ChangeState(NPC npc, Type stateType)
+    public void ChangeState(NPC npc, Type stateType, object args = null)
     {
-        Transition transition = new Transition {npc = npc, nextState = stateType};
+        Transition transition = new Transition {npc = npc, nextState = stateType, onEnterArgs = args};
         _pendingTransitions.Add(transition);
     }
     
@@ -88,7 +94,7 @@ public class AIManager :  MonoBehaviour, IGameService
 
             // Change the state and call OnEnter on the new state.
             npc.state = npc.states[nextState];
-            npc.state.OnEnter();
+            npc.state.OnEnter(transition.onEnterArgs);
         }
         
         // Finally, clear all transitions.

@@ -12,7 +12,7 @@ namespace Entities.NPC.States
             _aiManager = ServiceLocator.Current.Get<AIManager>();
         }
         
-        public override void OnEnter()
+        public override void OnEnter(object args = null)
         {
             float dst = Vector2.Distance(npc.transform.position, npc.spawnPosition);
             if (dst > _walkBackToOriginalPositionDst)

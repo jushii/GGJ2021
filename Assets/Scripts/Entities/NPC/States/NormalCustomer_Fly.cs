@@ -21,7 +21,7 @@ namespace Entities.NPC.States
             _aiManager = ServiceLocator.Current.Get<AIManager>();
         }
 
-        public override void OnEnter()
+        public override void OnEnter(object args = null)
         {
             _flyStarted = false;
             _freezeTimer = _freezeTime;
@@ -42,7 +42,7 @@ namespace Entities.NPC.States
                 if (_freezeTimer <= 0)
                 {
                     _flyStarted = true;
-                    
+
                     flyDirection = (npc.transform.position - _entityManager.players[0].transform.position).normalized;
                     npc.rigidbody2D.AddForce(flyDirection.normalized * flyingSpeed, ForceMode2D.Impulse);
                 }
