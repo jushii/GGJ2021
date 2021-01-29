@@ -21,7 +21,7 @@ namespace Entities.NPC.States
             _aiManager = ServiceLocator.Current.Get<AIManager>();
         }
 
-        public override void OnEnter()
+        public override void OnEnter(object args = null)
         {
             _flyStarted = false;
             _freezeTimer = _freezeTime;

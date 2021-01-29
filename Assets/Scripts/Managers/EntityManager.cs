@@ -61,7 +61,7 @@ public class EntityManager : MonoBehaviour, IGameService
     //     int playerIndex = -1;
     //     
     //     for (int i = 0; i < players.Count; i++)
-    //     {
+    //     {        
     //         Player player = players[i];
     //         Vector2 playerPosition = player.transform.position;
     //         float dst = Vector2.Distance(npcPosition, playerPosition);

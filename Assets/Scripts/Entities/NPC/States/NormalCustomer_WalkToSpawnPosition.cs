@@ -2,7 +2,7 @@
 {
     public class NormalCustomer_WalkToSpawnPosition : State
     {
-        public override void OnEnter()
+        public override void OnEnter(object args = null)
         {
             npc.MoveTo(npc.spawnPosition);
         }
