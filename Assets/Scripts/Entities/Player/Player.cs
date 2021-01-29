@@ -31,12 +31,12 @@ public class Player : MonoBehaviour
     
     public float punchHitboxHorizontal = 1f;
     public float punchHitboxVertical = 5f;
-    public float punchHitBoxOffset = 1.0f;
+    public float punchHitBoxOffset = 1.255f;
 
-    private Collider2D[] punchedNPCs = new Collider2D[10];
+    private Collider2D[] punchedNPCs = new Collider2D[20];
     private Collider2D[] nearbyNPCs = new Collider2D[5];
     private LayerMask mask;
-    private int _punchFrameTime = 2;
+    private int _punchFrameTime = 1;
     private int _punchFrameTimer;
     
     private Animator _animator;
@@ -46,7 +46,7 @@ public class Player : MonoBehaviour
     private float _lookAngle = 0.0f;        // player's looking direction angle in radian ranged from 0 to 2*Pi
     private float _angleDivider = 45.0f;
     private LookDirection _lookDirection = LookDirection.Right;
-    private List<Kid> _followers = new List<Kid>();
+    private List<NPC> _followers = new List<NPC>();
 
     private void Start()
     {
@@ -109,7 +109,7 @@ public class Player : MonoBehaviour
     private void UpdateMovementSpeed()
     {
         int layerMask = 1 << LayerMask.NameToLayer("NPC");
-        int count = Physics2D.OverlapCircleNonAlloc(transform.position, 0.5f, nearbyNPCs, layerMask);
+        int count = Physics2D.OverlapCircleNonAlloc(transform.position, 0.2f, nearbyNPCs, layerMask);
 
         if (_punchFrameTimer > 0)
         {
@@ -193,14 +193,19 @@ public class Player : MonoBehaviour
         //Gizmos.DrawWireCube(transform.position + new Vector3(_lookVector.x, _lookVector.y, 0.0f) * punchHitBoxOffset, Vector3.one * 2.0f);
     }
 
-    public void AddFollower(Kid kid)
+    public void AddFollower(NPC kid)
     {
         _followers.Add(kid);
     }
-    
-    public Transform GetKidFollowTarget(Kid kidRequestingFollowTarget)
+
+    public void RemoveFollower(NPC kid)
     {
-        int kidIndex = _followers.IndexOf(kidRequestingFollowTarget);
+        _followers.Remove(kid);
+    }
+    
+    public Transform GetKidFollowTarget(NPC kid)
+    {
+        int kidIndex = _followers.IndexOf(kid);
 
         if (kidIndex == 0)
         {

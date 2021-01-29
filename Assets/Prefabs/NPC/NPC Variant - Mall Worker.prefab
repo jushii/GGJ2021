@@ -12,7 +12,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49b412f47a6441a191e3139652eaf7b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  behaviourType: 2
+  behaviourType: 5
+  aiPath: {fileID: 1571143997626298672}
+  aiDestinationSetter: {fileID: 2904950353711302526}
+  rvoController: {fileID: 8734148105583898961}
+  rigidbody2D: {fileID: 5635585466911776118}
+  aiManager: {fileID: 0}
+  spawnPosition: {x: 0, y: 0, z: 0}
+--- !u!114 &185886070713356953
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5729240286196623310}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 194fc07bc65e41cabe1742374bd950fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  behaviourType: 5
   aiPath: {fileID: 1571143997626298672}
   aiDestinationSetter: {fileID: 2904950353711302526}
   rvoController: {fileID: 8734148105583898961}
@@ -38,9 +57,21 @@ PrefabInstance:
       propertyPath: m_Radius
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4160329091790254268, guid: aa6dcc2d0c8ec74439c68b2c70ce2f36, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4160329091790254268, guid: aa6dcc2d0c8ec74439c68b2c70ce2f36, type: 3}
+      propertyPath: m_Color.g
+      value: 0.4494347
+      objectReference: {fileID: 0}
+    - target: {fileID: 4160329091790254268, guid: aa6dcc2d0c8ec74439c68b2c70ce2f36, type: 3}
+      propertyPath: m_Color.r
+      value: 0.18396229
+      objectReference: {fileID: 0}
     - target: {fileID: 6516432204732116624, guid: aa6dcc2d0c8ec74439c68b2c70ce2f36, type: 3}
       propertyPath: m_Name
-      value: NPC Variant - Normal Customer
+      value: NPC Variant - Mall Worker
       objectReference: {fileID: 0}
     - target: {fileID: 8206840239263970951, guid: aa6dcc2d0c8ec74439c68b2c70ce2f36, type: 3}
       propertyPath: m_LocalPosition.y

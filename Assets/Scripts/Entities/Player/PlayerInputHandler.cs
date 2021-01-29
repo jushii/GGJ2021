@@ -1,18 +1,30 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerInputHandler : MonoBehaviour
 {
-    [SerializeField] private Player _player;
+    private Player _player;
+
+    private void Awake()
+    {
+        _player = GetComponent<Player>();
+    }
 
     public void OnLightPunch(InputAction.CallbackContext context)
     {
-        _player.Punch();
+        if (_player != null)
+        {
+            _player.Punch();
+        }
     }
 
     public void OnMove(InputAction.CallbackContext context)
     {
-        _player.SetInputVector(context.ReadValue<Vector2>());
-        _player.RunAnimation();
+        if (_player != null)
+        {
+            _player.SetInputVector(context.ReadValue<Vector2>());
+            _player.RunAnimation();
+        }
     }
 }

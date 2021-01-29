@@ -5,4 +5,5 @@
     NormalCustomer,
     Kid,
     PromotionGuy,
+    MallWorker
 }
