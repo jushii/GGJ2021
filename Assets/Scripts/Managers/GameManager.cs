@@ -1,9 +1,17 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class GameManager : MonoBehaviour
 {
+    [Header("Managers")]
     [SerializeField] private EntityManager entityManager;
     [SerializeField] private AIManager aiManager;
+    [SerializeField] private PlayerInputManager playerInputManager;
+    [Header("Prefabs")] 
+    [SerializeField] private GameObject player0Prefab;
+    [SerializeField] private GameObject player1Prefab;
+
+    private int _playerCount = 0;
     
     private void Awake()
     {
@@ -17,6 +25,12 @@ public class GameManager : MonoBehaviour
         aiManager.Setup();
     }
 
+    public void OnPlayerJoined(PlayerInput playerInput)
+    {
+        _playerCount++;
+        playerInputManager.playerPrefab = player1Prefab;
+    }
+    
     private void SetupSystems()
     {
         // InitializeAI();
