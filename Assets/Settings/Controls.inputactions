@@ -81,7 +81,7 @@
                 {
                     "name": "2D Vector - Left Stick",
                     "id": "b2d75c37-5fcd-4565-9ea7-0238c390c65c",
-                    "path": "2DVector",
+                    "path": "2DVector(mode=2)",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
