@@ -2,5 +2,7 @@
 {
     None,
     Consumer,
-    SalesPerson,
+    NormalCustomer,
+    Kid,
+    PromotionGuy,
 }

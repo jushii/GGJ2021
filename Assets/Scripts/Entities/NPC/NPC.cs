@@ -10,25 +10,44 @@ public class NPC : MonoBehaviour
     public State state;
     public Dictionary<Type, State> states = new Dictionary<Type, State>();
     public AIPath aiPath;
-    public AIDestinationSetter aiDestinationSetter;
+    public AIDestinationSetterNPC aiDestinationSetter;
     public RVOController rvoController;
     public Rigidbody2D rigidbody2D;
+    public AIManager aiManager;
+    public Vector3 spawnPosition;
     
     private void Start()
     {
         ServiceLocator.Current.Get<EntityManager>().RegisterNPC(this);
-        ServiceLocator.Current.Get<AIManager>().SetupNPC(this);
+
+        spawnPosition = transform.position;
+        
+        aiManager = ServiceLocator.Current.Get<AIManager>();
+        aiManager.SetupNPC(this);
     }
 
+    public void MoveTo(Vector3 position)
+    {
+        aiDestinationSetter.targetPosition = position;
+        aiPath.canMove = true;
+    }
+
+    public void StopMoving()
+    {
+        aiPath.canMove = false;
+    }
+    
     public void StartFollowing(Transform target)
     {
-        aiDestinationSetter.target = target;
+        aiDestinationSetter.targetObject = target;
         aiPath.canMove = true;
     }
 
     public void StopFollowing()
     {
         aiPath.canMove = false;
-        aiDestinationSetter.target = null;
+        aiDestinationSetter.targetPosition = null;
     }
+
+    public virtual void OnPunch() { }
 }

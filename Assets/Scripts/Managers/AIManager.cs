@@ -19,7 +19,14 @@ public class AIManager :  MonoBehaviour, IGameService
         consumer.availableStates.Add(typeof(Consumer_MoveToTarget));
         consumer.availableStates.Add(typeof(Consumer_Fly));
 
+        NPC_GenerationParameters normalCustomer = new NPC_GenerationParameters();
+        normalCustomer.startingState = typeof(NormalCustomer_Idle);
+        normalCustomer.availableStates.Add(typeof(NormalCustomer_Idle));
+        normalCustomer.availableStates.Add(typeof(NormalCustomer_Fly));
+        normalCustomer.availableStates.Add(typeof(NormalCustomer_WalkToSpawnPosition));
+
         _generationParameters.Add(NPC_BehaviourType.Consumer, consumer);
+        _generationParameters.Add(NPC_BehaviourType.NormalCustomer, normalCustomer);
     }
 
     public void SetupNPC(NPC npc)
