@@ -7,7 +7,7 @@ namespace Entities.NPC.States
         private readonly AIManager _aiManager;
         private Player _followedPlayer;
         private Transform _followTarget;
-        private Collider2D[] foundExit = new Collider2D[1];
+        // private Collider2D[] foundExit = new Collider2D[1];
 
         public MallWorker_FollowPlayer()
         {
@@ -16,17 +16,18 @@ namespace Entities.NPC.States
         
         public override void OnEnter(object args = null)
         {
-            // if (args is Player player)
-            // {
-            //     _followedPlayer = player;
-            //     
-            //     // First add the kid as a new follower.
-            //     _followedPlayer.AddFollower(npc);
-            // }
-            // else
-            // {
-            //     _aiManager.ChangeState(npc, typeof(Kid_Idle));
-            // }
+            if (args is Player player)
+            {
+                _followedPlayer = player;
+                
+                npc.StartFollowing(_followedPlayer.transform);
+                // First add the kid as a new follower.
+                // _followedPlayer.AddFollower(npc);
+            }
+            else
+            {
+                _aiManager.ChangeState(npc, typeof(MallWorker_Idle));
+            }
         }
 
         public override void OnExit()

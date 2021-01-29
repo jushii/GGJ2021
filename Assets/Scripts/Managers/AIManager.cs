@@ -35,7 +35,8 @@ public class AIManager :  MonoBehaviour, IGameService
         mallWorker.startingState = typeof(MallWorker_Idle);
         mallWorker.availableStates.Add(typeof(MallWorker_Idle));
         mallWorker.availableStates.Add(typeof(MallWorker_FollowPlayer));
-
+        mallWorker.availableStates.Add(typeof(MallWorker_Fly));
+        
         _generationParameters.Add(NPC_BehaviourType.Consumer, consumer);
         _generationParameters.Add(NPC_BehaviourType.NormalCustomer, normalCustomer);
         _generationParameters.Add(NPC_BehaviourType.Kid, kid);
