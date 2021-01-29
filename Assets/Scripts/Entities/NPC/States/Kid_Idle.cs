@@ -35,7 +35,7 @@ namespace Entities.NPC.States
                 {
                     if (foundPlayer[i].TryGetComponent(out Player player))
                     {
-                        _aiManager.ChangeState(npc, typeof(Kid_FollowTarget), player.transform);
+                        _aiManager.ChangeState(npc, typeof(Kid_FollowPlayer), player);
                     }
                 }
             }

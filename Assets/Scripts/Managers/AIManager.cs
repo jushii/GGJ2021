@@ -28,7 +28,7 @@ public class AIManager :  MonoBehaviour, IGameService
         NPC_GenerationParameters kid = new NPC_GenerationParameters();
         kid.startingState = typeof(Kid_Idle);
         kid.availableStates.Add(typeof(Kid_Idle));
-        kid.availableStates.Add(typeof(Kid_FollowTarget));
+        kid.availableStates.Add(typeof(Kid_FollowPlayer));
 
         _generationParameters.Add(NPC_BehaviourType.Consumer, consumer);
         _generationParameters.Add(NPC_BehaviourType.NormalCustomer, normalCustomer);

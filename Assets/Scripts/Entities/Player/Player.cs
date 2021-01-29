@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
 
@@ -27,6 +28,8 @@ public class Player : MonoBehaviour
     private int _punchFrameTime = 2;
     private int _punchFrameTimer;
 
+    private List<Kid> _followers = new List<Kid>();
+    
     private void Start()
     {
         ServiceLocator.Current.Get<EntityManager>().RegisterPlayer(this);
@@ -119,5 +122,22 @@ public class Player : MonoBehaviour
         // Gizmos.color = Color.red;
 
         // Gizmos.DrawWireCube(transform.position + new Vector3(_lookVector.x, _lookVector.y, 0.0f) * punchHitBoxOffset, Vector3.one * 2.0f);
+    }
+
+    public void AddFollower(Kid kid)
+    {
+        _followers.Add(kid);
+    }
+    
+    public Transform GetKidFollowTarget(Kid kidRequestingFollowTarget)
+    {
+        int kidIndex = _followers.IndexOf(kidRequestingFollowTarget);
+
+        if (kidIndex == 0)
+        {
+            return transform;
+        }
+
+        return _followers[kidIndex - 1].transform;
     }
 }
