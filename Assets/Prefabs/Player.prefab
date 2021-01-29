@@ -163,9 +163,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81a8558d2ab550d40a3b44a3ebdd72aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxSpeed: 10
-  currentMaxSpeed: 10
-  moveSpeed: 30
+  maxSpeed: 15
+  currentMaxSpeed: 15
+  moveSpeed: 50
+  lookVector: {x: 0, y: -1}
   _rb2d: {fileID: -2721954749470373811}
   camera: {fileID: 5869160183462767592}
   cameraHolder: {fileID: 4969319165093343110}

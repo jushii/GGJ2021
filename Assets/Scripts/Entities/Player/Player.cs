@@ -8,7 +8,7 @@ public class Player : MonoBehaviour
     public float currentMaxSpeed;
     public float moveSpeed = 10.0f;
     private Vector2 _inputVector = Vector2.zero;
-    private Vector2 _lookVector = Vector2.zero;
+    public Vector2 lookVector = Vector2.zero;
     private Vector2 _velocity = Vector2.zero;
     public Rigidbody2D _rb2d;
     public Camera camera;
@@ -38,7 +38,7 @@ public class Player : MonoBehaviour
 
         if (dir.magnitude != 0.0f)
         {
-            _lookVector = _inputVector;
+            lookVector = _inputVector;
         }
     }
 
@@ -65,9 +65,9 @@ public class Player : MonoBehaviour
         // size = new Vector2(punchHitboxHorizontal, punchHitboxVertical);
         // punchedNPCs = Physics2D.OverlapCapsuleAll(point, size, CapsuleDirection2D.Horizontal, 0f, mask);
         Vector2 playerPos2D = new Vector2(transform.position.x, transform.position.y);
-        float angle = Vector2.Angle(playerPos2D, playerPos2D + _lookVector);
+        float angle = Vector2.Angle(playerPos2D, playerPos2D + lookVector);
         
-        int punchedNpcCount = Physics2D.OverlapBoxNonAlloc(playerPos2D + new Vector2(_lookVector.x, _lookVector.y) * punchHitBoxOffset, Vector2.one * 2.5f, angle, punchedNPCs, mask);
+        int punchedNpcCount = Physics2D.OverlapBoxNonAlloc(playerPos2D + new Vector2(lookVector.x, lookVector.y) * punchHitBoxOffset, Vector2.one * 2.5f, angle, punchedNPCs, mask);
 
         if (punchedNpcCount > 0)
         {
