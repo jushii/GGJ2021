@@ -36,7 +36,7 @@ public class Player : MonoBehaviour
     private Collider2D[] punchedNPCs = new Collider2D[20];
     private Collider2D[] nearbyNPCs = new Collider2D[5];
     private LayerMask mask;
-    private int _punchFrameTime = 2;
+    private int _punchFrameTime = 1;
     private int _punchFrameTimer;
     
     private Animator _animator;
