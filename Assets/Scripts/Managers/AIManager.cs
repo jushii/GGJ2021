@@ -31,9 +31,15 @@ public class AIManager :  MonoBehaviour, IGameService
         kid.availableStates.Add(typeof(Kid_FollowPlayer));
         kid.availableStates.Add(typeof(Kid_GoToExit));
 
+        NPC_GenerationParameters mallWorker = new NPC_GenerationParameters();
+        mallWorker.startingState = typeof(MallWorker_Idle);
+        mallWorker.availableStates.Add(typeof(MallWorker_Idle));
+        mallWorker.availableStates.Add(typeof(MallWorker_FollowPlayer));
+
         _generationParameters.Add(NPC_BehaviourType.Consumer, consumer);
         _generationParameters.Add(NPC_BehaviourType.NormalCustomer, normalCustomer);
         _generationParameters.Add(NPC_BehaviourType.Kid, kid);
+        _generationParameters.Add(NPC_BehaviourType.MallWorker, mallWorker);
     }
 
     public void SetupNPC(NPC npc)
