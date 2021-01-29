@@ -34,19 +34,23 @@ public class NPC : MonoBehaviour
 
     public void StopMoving()
     {
+        aiDestinationSetter.targetPosition = null;
+        aiDestinationSetter.targetObject = null;
         aiPath.canMove = false;
     }
     
     public void StartFollowing(Transform target)
     {
+        aiDestinationSetter.targetPosition = null;
         aiDestinationSetter.targetObject = target;
         aiPath.canMove = true;
     }
 
     public void StopFollowing()
     {
-        aiPath.canMove = false;
         aiDestinationSetter.targetPosition = null;
+        aiDestinationSetter.targetObject = null;
+        aiPath.canMove = false;
     }
 
     public virtual void OnPunch() { }
