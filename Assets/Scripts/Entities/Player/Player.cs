@@ -31,7 +31,7 @@ public class Player : MonoBehaviour
     
     public float punchHitboxHorizontal = 1f;
     public float punchHitboxVertical = 5f;
-    public float punchHitBoxOffset = 1.0f;
+    public float punchHitBoxOffset = 1.255f;
 
     private Collider2D[] punchedNPCs = new Collider2D[20];
     private Collider2D[] nearbyNPCs = new Collider2D[5];
