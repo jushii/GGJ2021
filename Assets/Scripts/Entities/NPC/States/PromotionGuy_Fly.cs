@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class MallWorker_Fly : State
+public class PromotionGuy_Fly : State
 {
     private readonly EntityManager _entityManager;
     private readonly AIManager _aiManager;
@@ -13,7 +13,7 @@ public class MallWorker_Fly : State
     // private float _freezeTime = 0.15f;
     private float _freezeTime = 0.05f;
     
-    public MallWorker_Fly()
+    public PromotionGuy_Fly()
     {
         _entityManager = ServiceLocator.Current.Get<EntityManager>();
         _aiManager = ServiceLocator.Current.Get<AIManager>();
@@ -50,7 +50,7 @@ public class MallWorker_Fly : State
         {
             npc.rigidbody2D.velocity = Vector2.zero;
             npc.aiPath.rvoDensityBehavior.enabled = true;
-            _aiManager.ChangeState(npc, typeof(MallWorker_Idle));
+            _aiManager.ChangeState(npc, typeof(PromotionGuy_ChaseKid));
         }
     }
 }

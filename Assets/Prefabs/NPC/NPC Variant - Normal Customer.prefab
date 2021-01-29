@@ -15,6 +15,7 @@ MonoBehaviour:
   behaviourType: 2
   aiPath: {fileID: 1571143997626298672}
   aiDestinationSetter: {fileID: 2904950353711302526}
+  seeker: {fileID: 3625808264900859584}
   rvoController: {fileID: 8734148105583898961}
   rigidbody2D: {fileID: 5635585466911776118}
   aiManager: {fileID: 0}
@@ -98,6 +99,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 6516432204732116624, guid: aa6dcc2d0c8ec74439c68b2c70ce2f36, type: 3}
   m_PrefabInstance: {fileID: 1580021573574871390}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &3625808264900859584 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2863207821044162462, guid: aa6dcc2d0c8ec74439c68b2c70ce2f36, type: 3}
+  m_PrefabInstance: {fileID: 1580021573574871390}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5729240286196623310}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 373b52eb9bf8c40f785bb6947a1aee66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &8734148105583898961 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7843212620631439375, guid: aa6dcc2d0c8ec74439c68b2c70ce2f36, type: 3}

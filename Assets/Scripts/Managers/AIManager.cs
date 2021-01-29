@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Entities.NPC.States;
 using UnityEngine;
 
 public class AIManager :  MonoBehaviour, IGameService
@@ -30,17 +29,26 @@ public class AIManager :  MonoBehaviour, IGameService
         kid.availableStates.Add(typeof(Kid_Idle));
         kid.availableStates.Add(typeof(Kid_FollowPlayer));
         kid.availableStates.Add(typeof(Kid_GoToExit));
-
+        kid.availableStates.Add(typeof(Kid_FollowPromotionGuy));
+        
         NPC_GenerationParameters mallWorker = new NPC_GenerationParameters();
         mallWorker.startingState = typeof(MallWorker_Idle);
         mallWorker.availableStates.Add(typeof(MallWorker_Idle));
         mallWorker.availableStates.Add(typeof(MallWorker_FollowPlayer));
         mallWorker.availableStates.Add(typeof(MallWorker_Fly));
         
+        NPC_GenerationParameters promotionGuy = new NPC_GenerationParameters();
+        promotionGuy.startingState = typeof(PromotionGuy_Idle);
+        promotionGuy.availableStates.Add(typeof(PromotionGuy_Idle));
+        promotionGuy.availableStates.Add(typeof(PromotionGuy_ChaseKid));
+        promotionGuy.availableStates.Add(typeof(PromotionGuy_RunAwayWithKid));
+        promotionGuy.availableStates.Add(typeof(PromotionGuy_Fly));
+
         _generationParameters.Add(NPC_BehaviourType.Consumer, consumer);
         _generationParameters.Add(NPC_BehaviourType.NormalCustomer, normalCustomer);
         _generationParameters.Add(NPC_BehaviourType.Kid, kid);
         _generationParameters.Add(NPC_BehaviourType.MallWorker, mallWorker);
+        _generationParameters.Add(NPC_BehaviourType.PromotionGuy, promotionGuy);
     }
 
     public void SetupNPC(NPC npc)

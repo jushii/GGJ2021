@@ -1,8 +1,8 @@
-﻿public class NormalCustomer_WalkToSpawnPosition : State
+﻿public class PromotionGuy_Idle : State
 {
     public override void OnEnter(object args = null)
     {
-        npc.MoveTo(npc.spawnPosition);
+        npc.StopFollowing();
     }
 
     public override void OnExit()
