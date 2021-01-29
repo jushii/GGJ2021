@@ -30,9 +30,21 @@ PrefabInstance:
       propertyPath: m_LinearDrag
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 9163449290651758, guid: aa6dcc2d0c8ec74439c68b2c70ce2f36, type: 3}
+      propertyPath: radius
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 509891453053187830, guid: aa6dcc2d0c8ec74439c68b2c70ce2f36, type: 3}
+      propertyPath: m_Radius
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6516432204732116624, guid: aa6dcc2d0c8ec74439c68b2c70ce2f36, type: 3}
       propertyPath: m_Name
       value: NPC Variant - Normal Customer
+      objectReference: {fileID: 0}
+    - target: {fileID: 8206840239263970951, guid: aa6dcc2d0c8ec74439c68b2c70ce2f36, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 8354047237933103097, guid: aa6dcc2d0c8ec74439c68b2c70ce2f36, type: 3}
       propertyPath: m_RootOrder

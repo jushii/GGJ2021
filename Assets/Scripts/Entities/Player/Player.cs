@@ -33,7 +33,7 @@ public class Player : MonoBehaviour
     public float punchHitboxVertical = 5f;
     public float punchHitBoxOffset = 1.0f;
 
-    private Collider2D[] punchedNPCs = new Collider2D[10];
+    private Collider2D[] punchedNPCs = new Collider2D[20];
     private Collider2D[] nearbyNPCs = new Collider2D[5];
     private LayerMask mask;
     private int _punchFrameTime = 2;
@@ -109,7 +109,7 @@ public class Player : MonoBehaviour
     private void UpdateMovementSpeed()
     {
         int layerMask = 1 << LayerMask.NameToLayer("NPC");
-        int count = Physics2D.OverlapCircleNonAlloc(transform.position, 0.5f, nearbyNPCs, layerMask);
+        int count = Physics2D.OverlapCircleNonAlloc(transform.position, 0.2f, nearbyNPCs, layerMask);
 
         if (_punchFrameTimer > 0)
         {
