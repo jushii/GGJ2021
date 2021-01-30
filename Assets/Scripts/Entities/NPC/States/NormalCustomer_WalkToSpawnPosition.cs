@@ -1,18 +1,15 @@
-﻿namespace Entities.NPC.States
+﻿public class NormalCustomer_WalkToSpawnPosition : State
 {
-    public class NormalCustomer_WalkToSpawnPosition : State
+    public override void OnEnter(object args = null)
     {
-        public override void OnEnter(object args = null)
-        {
-            npc.MoveTo(npc.spawnPosition);
-        }
+        npc.MoveTo(npc.spawnPosition);
+    }
 
-        public override void OnExit()
-        {
-        }
+    public override void OnExit()
+    {
+    }
 
-        public override void OnUpdate()
-        {
-        }
+    public override void OnUpdate()
+    {
     }
 }

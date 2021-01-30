@@ -262,6 +262,7 @@ MonoBehaviour:
   behaviourType: 1
   aiPath: {fileID: 9163449290651758}
   aiDestinationSetter: {fileID: 4448757960201063968}
+  seeker: {fileID: 2863207821044162462}
   rvoController: {fileID: 7843212620631439375}
   rigidbody2D: {fileID: -2605118940283464664}
   aiManager: {fileID: 0}
@@ -298,7 +299,7 @@ Rigidbody2D:
   m_LinearDrag: 1
   m_AngularDrag: 0.05
   m_GravityScale: 0
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: b60b08847b6adba4ba3fc48bee044c79, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public enum LookDirection
 {
@@ -31,7 +32,7 @@ public class Player : MonoBehaviour
     
     public float punchHitBoxOffset = 1.255f;
 
-    private Collider2D[] punchedNPCs = new Collider2D[20];
+    private Collider2D[] punchedNPCs = new Collider2D[30];
     private Collider2D[] nearbyNPCs = new Collider2D[5];
     private LayerMask mask;
     private int _punchFrameTime = 1;
@@ -44,8 +45,11 @@ public class Player : MonoBehaviour
     private float _lookAngle = 0.0f;        // player's looking direction angle in radian ranged from 0 to 2*Pi
     private float _angleDivider = 45.0f;
     private LookDirection _lookDirection = LookDirection.Right;
-    private List<NPC> _followers = new List<NPC>();
-
+    public List<Kid> followers = new List<Kid>();
+    public List<Transform> followerPositions;
+    private Dictionary<Kid, Transform> _reservedFollowerPositions = new Dictionary<Kid, Transform>();
+    public Transform followerPositionsPivot;
+    
     private void Start()
     {
         ServiceLocator.Current.Get<EntityManager>().RegisterPlayer(this);
@@ -87,6 +91,7 @@ public class Player : MonoBehaviour
         _punchFrameTimer = _punchFrameTime;
         
         mask = 1 << LayerMask.NameToLayer("NPC");
+        mask |= 1 << LayerMask.NameToLayer("PromotionGuy");
         Vector2 playerPos2D = new Vector2(transform.position.x, transform.position.y);
         float angle = Vector2.Angle(playerPos2D, playerPos2D + lookVector);
         
@@ -107,13 +112,13 @@ public class Player : MonoBehaviour
     private void UpdateMovementSpeed()
     {
         int layerMask = 1 << LayerMask.NameToLayer("NPC");
-        int count = Physics2D.OverlapCircleNonAlloc(transform.position, 0.2f, nearbyNPCs, layerMask);
+        int count = Physics2D.OverlapCircleNonAlloc(transform.position, 0.1f, nearbyNPCs, layerMask);
 
-        if (_punchFrameTimer > 0)
-        {
-            currentMaxSpeed = 0.0f;
-            return;
-        }
+        // if (_punchFrameTimer > 0)
+        // {
+        //     currentMaxSpeed = 0.0f;
+        //     return;
+        // }
         
         if (count > 0)
         {
@@ -197,25 +202,42 @@ public class Player : MonoBehaviour
         Gizmos.DrawWireCube(transform.position + new Vector3(lookVector.x, lookVector.y, 0.0f) * punchHitBoxOffset, Vector3.one * 2.0f);
     }
 
-    public void AddFollower(NPC kid)
+    public void AddFollower(Kid kid)
     {
-        _followers.Add(kid);
+        followers.Add(kid);
     }
 
-    public void RemoveFollower(NPC kid)
+    public void RemoveFollower(Kid kid)
     {
-        _followers.Remove(kid);
+        followers.Remove(kid);
     }
     
-    public Transform GetKidFollowTarget(NPC kid)
+    public Transform GetKidFollowTarget(Kid kid)
     {
-        int kidIndex = _followers.IndexOf(kid);
+        if (_reservedFollowerPositions.TryGetValue(kid, out Transform reservedPosition))
+        {
+            return reservedPosition;
+        }
+
+        Transform fPos = followerPositions[Random.Range(0, followerPositions.Count)];
+        followerPositions.Remove(fPos);
+        _reservedFollowerPositions[kid] = fPos;
+        return fPos;
+
+        // return transform;
+        
+        int kidIndex = followers.IndexOf(kid);
 
         if (kidIndex == 0)
         {
             return transform;
         }
 
-        return _followers[kidIndex - 1].transform;
+        return followers[kidIndex - 1].transform;
+    }
+
+    public Kid GetPromotionGuyFollowTargetKid()
+    {
+        return followers[followers.Count - 1];
     }
 }

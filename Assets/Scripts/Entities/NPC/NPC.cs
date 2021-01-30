@@ -11,6 +11,7 @@ public class NPC : MonoBehaviour
     public Dictionary<Type, State> states = new Dictionary<Type, State>();
     public AIPath aiPath;
     public AIDestinationSetterNPC aiDestinationSetter;
+    public Seeker seeker;
     public RVOController rvoController;
     public Rigidbody2D rigidbody2D;
     public AIManager aiManager;
@@ -54,5 +55,19 @@ public class NPC : MonoBehaviour
         aiPath.canMove = false;
     }
 
+    public void SetPath(Path p)
+    {
+        StopFollowing();
+        aiPath.canMove = true;
+        aiPath.SetPath(p);
+    }
+
+    public void ClearPath()
+    {
+        StopFollowing();
+        aiPath.canMove = false;
+        aiPath.SetPath(null);
+    }
+    
     public virtual void OnPunch() { }
 }

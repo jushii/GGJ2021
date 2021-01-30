@@ -29,7 +29,7 @@ public class NormalCustomer : NPC
 
     public override void OnPunch()
     {
-       aiManager.ChangeState(this, typeof(Entities.NPC.States.NormalCustomer_Fly));
+       aiManager.ChangeState(this, typeof(NormalCustomer_Fly));
     }
 
     private void CacheAnimatorParameterIds()
