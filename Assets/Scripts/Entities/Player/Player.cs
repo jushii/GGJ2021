@@ -122,16 +122,16 @@ public class Player : MonoBehaviour
         
         if (count > 0)
         {
-            for(int i = 0; i < count; i++)
+            for (int i = 0; i < count; i++)
             {
-                if (!((NormalCustomer)nearbyNPCs[i].GetComponent<NPC>()).stunned)
+                if (!nearbyNPCs[i].GetComponent<NPC>().stunned)
                 {
                     currentMaxSpeed = 1.0f;
                     return;
                 }
             }
         }
-
+        
         currentMaxSpeed = maxSpeed;
     }
 

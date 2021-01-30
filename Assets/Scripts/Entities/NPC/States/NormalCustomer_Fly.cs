@@ -17,8 +17,6 @@ public class NormalCustomer_Fly : State
     private float _freezeTimer;
     // private float _freezeTime = 0.15f;
     private float _freezeTime = 0.05f;
-    private float _stunnedTimer;
-    private float _stunnedTime = 1.5f;
     private float _timeMultiplier = 5f;
 
     private int flyingAnimationType;
@@ -33,8 +31,8 @@ public class NormalCustomer_Fly : State
     {
         _flyStarted = false;
         _freezeTimer = _freezeTime;
-        ((NormalCustomer)npc).stunned = false;
-        _stunnedTimer = _stunnedTime;
+
+        npc.stunned = false;
         flyHeightCounter = flyHeight;
 
         npc.StopFollowing();
@@ -55,8 +53,8 @@ public class NormalCustomer_Fly : State
                 _flyStarted = true;
 
                 flyDirection = (npc.transform.position - _entityManager.players[0].transform.position).normalized;
-                flyNormalDirection = new Vector3(flyDirection.y, -flyDirection.x, 0);
-                npc.rigidbody2D.AddForce(flyDirection * flyingSpeed + flyNormalDirection * flyHeight / 2, ForceMode2D.Impulse);
+                flyNormalDirection = new Vector3(flyDirection.y, -flyDirection.x, 0);           // normal vector of flying direction vector                
+                npc.rigidbody2D.AddForce(flyDirection * flyingSpeed + flyNormalDirection * flyHeight / 3, ForceMode2D.Impulse);
             }
         }
 
@@ -67,10 +65,10 @@ public class NormalCustomer_Fly : State
                 npc.rigidbody2D.velocity = Vector2.zero;
                 npc.aiPath.rvoDensityBehavior.enabled = true;
 
-                if (((NormalCustomer)npc).stunned)
+                if (npc.stunned)
                 {
-                    ((NormalCustomer)npc).ResetAnimatorTriggers();
-                    ((NormalCustomer)npc).Animator.SetTrigger("Idle");
+                    npc.ResetAnimatorTriggers();
+                    npc.Animator.SetTrigger("Idle");
 
                     _aiManager.ChangeState(npc, typeof(NormalCustomer_Idle));
                 }
@@ -84,17 +82,18 @@ public class NormalCustomer_Fly : State
                     flyHeightCounter = 0;
                 }
 
-                ((NormalCustomer)npc).ResetAnimatorTriggers();
+                npc.ResetAnimatorTriggers();
+                npc.stunned = true;
 
-                ((NormalCustomer)npc).stunned = true;
+                // randomly choose to play flying animation
                 flyingAnimationType = Random.Range(1, 100);
                 if (flyingAnimationType % 2 == 0)
                 {
-                    ((NormalCustomer)npc).Animator.SetTrigger("Fly1");
+                    npc.Animator.SetTrigger("Fly1");
                 }
                 else
                 {
-                    ((NormalCustomer)npc).Animator.SetTrigger("Fly2");
+                    npc.Animator.SetTrigger("Fly2");
                 }
             }
         }
