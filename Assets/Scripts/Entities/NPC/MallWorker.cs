@@ -1,16 +1,16 @@
 ﻿public class MallWorker : NPC
 {
-    public override void Start()
-    {
-        ServiceLocator.Current.Get<EntityManager>().RegisterNPC(this);
+    //public override void Start()
+    //{
+    //    ServiceLocator.Current.Get<EntityManager>().RegisterNPC(this);
 
-        spawnPosition = transform.position;
+    //    spawnPosition = transform.position;
 
-        aiManager = ServiceLocator.Current.Get<AIManager>();
-        aiManager.SetupNPC(this);
+    //    aiManager = ServiceLocator.Current.Get<AIManager>();
+    //    aiManager.SetupNPC(this);
 
-        stunned = false;
-    }
+    //    stunned = false;
+    //}
 
     public override void OnPunch()
     {

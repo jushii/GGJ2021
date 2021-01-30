@@ -953,8 +953,6 @@ MonoBehaviour:
   _rb2d: {fileID: -2721954749470373811}
   camera: {fileID: 5869160183462767592}
   cameraHolder: {fileID: 4969319165093343110}
-  punchHitboxHorizontal: 1
-  punchHitboxVertical: 5
   punchHitBoxOffset: 0.5
   followers: []
   followerPositions:
@@ -1340,7 +1338,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 853ae4dd0f10d104693a043a527d7897, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d32458dd2ce430542b37155ab2082f07, type: 3}
   m_Color: {r: 0.9960785, g: 0.4156863, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0

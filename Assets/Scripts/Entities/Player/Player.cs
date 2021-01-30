@@ -169,6 +169,14 @@ public class Player : MonoBehaviour
                 ResetAnimatorTriggers();
                 _animator.SetTrigger("RunRight");
                 break;
+            case LookDirection.Top:
+                ResetAnimatorTriggers();
+                _animator.SetTrigger("RunTop");
+                break;
+            case LookDirection.Bottom:
+                ResetAnimatorTriggers();
+                _animator.SetTrigger("RunBottom");
+                break;
             case LookDirection.None:
                 ResetAnimatorTriggers();
                 _animator.SetTrigger("Idle");

@@ -4,6 +4,9 @@ public class MallWorker_Idle : State
 {
     private readonly AIManager _aiManager;
     private Collider2D[] foundPlayer = new Collider2D[2];
+
+    private float _standUpTimer;
+    private float _standUpTime = 1f;
     
     public MallWorker_Idle()
     {
@@ -12,6 +15,7 @@ public class MallWorker_Idle : State
     
     public override void OnEnter(object args = null)
     {
+        _standUpTimer = _standUpTime;
     }
 
     public override void OnExit()
@@ -20,7 +24,12 @@ public class MallWorker_Idle : State
 
     public override void OnUpdate()
     {
-        LookForPlayer();
+        _standUpTimer -= Time.deltaTime;
+        if (_standUpTimer <= 0)
+        {
+            npc.stunned = false;
+            LookForPlayer();
+        }
     }
 
     private void LookForPlayer()

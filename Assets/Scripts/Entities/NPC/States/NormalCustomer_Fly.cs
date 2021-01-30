@@ -9,13 +9,15 @@ public class NormalCustomer_Fly : State
 
     private Vector3 flyDirection;
     private Vector3 flyNormalDirection;
-    private float stillSpeed = 1f;
-    private float flyingSpeed = 25f;
+    private float flySpeed = 25f;
     private float flyHeightCounter;
     private float flyHeight = 15f;
     private bool _flyStarted;
+
+    private float _flyTimer;
+    private float _flyTime = 1f;
+
     private float _freezeTimer;
-    // private float _freezeTime = 0.15f;
     private float _freezeTime = 0.05f;
     private float _timeMultiplier = 5f;
 
@@ -31,6 +33,7 @@ public class NormalCustomer_Fly : State
     {
         _flyStarted = false;
         _freezeTimer = _freezeTime;
+        _flyTimer = _flyTime;
 
         npc.stunned = false;
         flyHeightCounter = flyHeight;
@@ -54,13 +57,14 @@ public class NormalCustomer_Fly : State
 
                 flyDirection = (npc.transform.position - _entityManager.players[0].transform.position).normalized;
                 flyNormalDirection = new Vector3(flyDirection.y, -flyDirection.x, 0);           // normal vector of flying direction vector                
-                npc.rigidbody2D.AddForce(flyDirection * flyingSpeed + flyNormalDirection * flyHeight / 3, ForceMode2D.Impulse);
+                npc.rigidbody2D.AddForce(flyDirection * flySpeed + flyNormalDirection * flyHeight / 3, ForceMode2D.Impulse);
             }
         }
 
         if (_flyStarted)
         {
-            if (npc.rigidbody2D.velocity.magnitude < stillSpeed)
+            _flyTimer -= Time.deltaTime;
+            if (_flyTimer <= 0)
             {
                 npc.rigidbody2D.velocity = Vector2.zero;
                 npc.aiPath.rvoDensityBehavior.enabled = true;
@@ -98,6 +102,5 @@ public class NormalCustomer_Fly : State
             }
         }
     }
-
 }
 
