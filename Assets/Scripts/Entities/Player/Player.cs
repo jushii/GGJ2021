@@ -30,8 +30,6 @@ public class Player : MonoBehaviour
     public GameObject cameraHolder;
     private Tweener _cameraShakeTween;
     
-    public float punchHitboxHorizontal = 1f;
-    public float punchHitboxVertical = 5f;
     public float punchHitBoxOffset = 1.255f;
 
     private Collider2D[] punchedNPCs = new Collider2D[30];
@@ -124,10 +122,16 @@ public class Player : MonoBehaviour
         
         if (count > 0)
         {
-            currentMaxSpeed = 1.0f;
-            return;
+            for (int i = 0; i < count; i++)
+            {
+                if (!nearbyNPCs[i].GetComponent<NPC>().stunned)
+                {
+                    currentMaxSpeed = 1.0f;
+                    return;
+                }
+            }
         }
-
+        
         currentMaxSpeed = maxSpeed;
     }
 
@@ -165,6 +169,14 @@ public class Player : MonoBehaviour
                 ResetAnimatorTriggers();
                 _animator.SetTrigger("RunRight");
                 break;
+            case LookDirection.Top:
+                ResetAnimatorTriggers();
+                _animator.SetTrigger("RunTop");
+                break;
+            case LookDirection.Bottom:
+                ResetAnimatorTriggers();
+                _animator.SetTrigger("RunBottom");
+                break;
             case LookDirection.None:
                 ResetAnimatorTriggers();
                 _animator.SetTrigger("Idle");
@@ -194,8 +206,8 @@ public class Player : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        //Gizmos.color = Color.red;
-        //Gizmos.DrawWireCube(transform.position + new Vector3(_lookVector.x, _lookVector.y, 0.0f) * punchHitBoxOffset, Vector3.one * 2.0f);
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireCube(transform.position + new Vector3(lookVector.x, lookVector.y, 0.0f) * punchHitBoxOffset, Vector3.one * 2.0f);
     }
 
     public void AddFollower(Kid kid)

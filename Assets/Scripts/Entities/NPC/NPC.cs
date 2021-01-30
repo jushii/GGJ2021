@@ -17,7 +17,28 @@ public class NPC : MonoBehaviour
     public AIManager aiManager;
     public Vector3 spawnPosition;
     
-    private void Start()
+    public bool stunned;
+    private Animator _animator;
+    private AnimatorControllerParameter tmpParameter;
+    private List<int> _cachedParameterIds = new List<int>();
+
+    public Animator Animator
+    {
+        get
+        {
+            try
+            {
+                return GetComponent<Animator>();
+            }
+            catch (Exception)
+            {
+                Debug.Log("No animator component on this entity");
+                throw new Exception();
+            }
+        }
+    }
+
+    public virtual void Start()
     {
         ServiceLocator.Current.Get<EntityManager>().RegisterNPC(this);
 
@@ -25,6 +46,11 @@ public class NPC : MonoBehaviour
         
         aiManager = ServiceLocator.Current.Get<AIManager>();
         aiManager.SetupNPC(this);
+
+        stunned = false;
+
+        _animator = GetComponent<Animator>();
+        CacheAnimatorParameterIds();
     }
 
     public void MoveTo(Vector3 position)
@@ -69,4 +95,24 @@ public class NPC : MonoBehaviour
     }
     
     public virtual void OnPunch() { }
+    
+    private void CacheAnimatorParameterIds()
+    {
+        for (int i = 0; i < _animator.parameters.Length; i++)
+        {
+            tmpParameter = _animator.parameters[i];
+            if (tmpParameter.type == AnimatorControllerParameterType.Trigger)
+            {
+                _cachedParameterIds.Add(Animator.StringToHash(tmpParameter.name));
+            }
+        }
+    }
+    public void ResetAnimatorTriggers()
+    {
+        foreach (int id in _cachedParameterIds)
+        {
+            _animator.ResetTrigger(id);
+        }
+    }
+
 }

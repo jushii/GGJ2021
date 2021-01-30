@@ -18,7 +18,7 @@ public class Consumer_Fly : State
     public override void OnEnter(object args = null)
     {
         npc.StopFollowing();
-        npc.aiPath.rvoDensityBehavior.enabled = false; 
+        npc.aiPath.rvoDensityBehavior.enabled = false;
         flyDirection = (npc.transform.position - _entityManager.players[0].transform.position).normalized;
         npc.rigidbody2D.AddForce(flyDirection.normalized * flyingSpeed, ForceMode2D.Impulse);
     }
