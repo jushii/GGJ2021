@@ -267,7 +267,6 @@ MonoBehaviour:
   rigidbody2D: {fileID: -2605118940283464664}
   aiManager: {fileID: 0}
   spawnPosition: {x: 0, y: 0, z: 0}
-  sprite: {fileID: 6180387894273883833}
 --- !u!58 &509891453053187830
 CircleCollider2D:
   m_ObjectHideFlags: 0

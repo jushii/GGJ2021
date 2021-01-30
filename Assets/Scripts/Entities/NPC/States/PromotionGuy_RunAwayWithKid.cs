@@ -5,7 +5,7 @@ public class PromotionGuy_RunAwayWithKid : State
 {
     private readonly AIManager _aiManager;
     private EntityManager _entityManager;
-    private int _calculateFleePathFrameInterval => 60 * 6;
+    private int _calculateFleePathFrameInterval => 60 * 12;
     public Kid followerKid;
     
     public PromotionGuy_RunAwayWithKid()
@@ -26,6 +26,7 @@ public class PromotionGuy_RunAwayWithKid : State
     public override void OnExit()
     {
         followerKid = null;
+        npc.aiPath.maxSpeed = 3;
         npc.ClearPath();
     }
 
@@ -49,8 +50,9 @@ public class PromotionGuy_RunAwayWithKid : State
         npc.StopFollowing();
         npc.aiPath.canSearch = false;
         
-        FleePath fleePath = FleePath.Construct(npc.transform.position, player.transform.position, 1000 * 50);
+        FleePath fleePath = FleePath.Construct(npc.transform.position, player.transform.position, 1000 * 100);
         npc.aiPath.SetPath(fleePath);
         npc.aiPath.canMove = true;
+        npc.aiPath.maxSpeed = 3;
     }
 }

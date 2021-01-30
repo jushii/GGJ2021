@@ -20,7 +20,6 @@ MonoBehaviour:
   rigidbody2D: {fileID: 5635585466911776118}
   aiManager: {fileID: 0}
   spawnPosition: {x: 0, y: 0, z: 0}
-  sprite: {fileID: 4623080482948773863}
 --- !u!1001 &1580021573574871390
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -43,14 +42,6 @@ PrefabInstance:
     - target: {fileID: 6516432204732116624, guid: aa6dcc2d0c8ec74439c68b2c70ce2f36, type: 3}
       propertyPath: m_Name
       value: NPC Variant - Normal Customer
-      objectReference: {fileID: 0}
-    - target: {fileID: 7843212620631439375, guid: aa6dcc2d0c8ec74439c68b2c70ce2f36, type: 3}
-      propertyPath: priority
-      value: 0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7843212620631439375, guid: aa6dcc2d0c8ec74439c68b2c70ce2f36, type: 3}
-      propertyPath: collidesWith
-      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 8206840239263970951, guid: aa6dcc2d0c8ec74439c68b2c70ce2f36, type: 3}
       propertyPath: m_LocalPosition.y
@@ -157,8 +148,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94ae50474d9344198312a08aa02a2bd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &4623080482948773863 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6180387894273883833, guid: aa6dcc2d0c8ec74439c68b2c70ce2f36, type: 3}
-  m_PrefabInstance: {fileID: 1580021573574871390}
-  m_PrefabAsset: {fileID: 0}

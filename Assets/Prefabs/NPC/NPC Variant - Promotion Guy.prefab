@@ -20,7 +20,6 @@ MonoBehaviour:
   rigidbody2D: {fileID: 3834733134489476951}
   aiManager: {fileID: 0}
   spawnPosition: {x: 0, y: 0, z: 0}
-  sprite: {fileID: 4263309456382162374}
 --- !u!1001 &7993739081960475519
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -34,15 +33,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9163449290651758, guid: aa6dcc2d0c8ec74439c68b2c70ce2f36, type: 3}
       propertyPath: radius
-      value: 0.5
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 9163449290651758, guid: aa6dcc2d0c8ec74439c68b2c70ce2f36, type: 3}
       propertyPath: maxSpeed
-      value: 8
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 9163449290651758, guid: aa6dcc2d0c8ec74439c68b2c70ce2f36, type: 3}
       propertyPath: maxAcceleration
-      value: 35
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 4160329091790254268, guid: aa6dcc2d0c8ec74439c68b2c70ce2f36, type: 3}
       propertyPath: m_Color.b
@@ -78,11 +77,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7843212620631439375, guid: aa6dcc2d0c8ec74439c68b2c70ce2f36, type: 3}
       propertyPath: collidesWith
-      value: 9
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7843212620631439375, guid: aa6dcc2d0c8ec74439c68b2c70ce2f36, type: 3}
       propertyPath: maxNeighbours
-      value: 15
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 8206840239263970951, guid: aa6dcc2d0c8ec74439c68b2c70ce2f36, type: 3}
       propertyPath: m_LocalPosition.y
@@ -189,8 +188,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94ae50474d9344198312a08aa02a2bd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &4263309456382162374 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6180387894273883833, guid: aa6dcc2d0c8ec74439c68b2c70ce2f36, type: 3}
-  m_PrefabInstance: {fileID: 7993739081960475519}
-  m_PrefabAsset: {fileID: 0}
