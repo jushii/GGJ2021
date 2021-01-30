@@ -17,6 +17,14 @@ public enum LookDirection
     None,
 }
 
+public enum PunchDirection
+{
+    Left,
+    Right,
+    Top,
+    Bottom,
+}
+
 public class Player : MonoBehaviour
 {
     public Vector2 lookVector = Vector2.zero;
@@ -49,6 +57,7 @@ public class Player : MonoBehaviour
     private float _lookAngle = 0.0f;        // player's looking direction angle in radian ranged from 0 to 2*Pi
     private float _angleDivider = 45.0f;
     private LookDirection _lookDirection = LookDirection.Right;
+    public PunchDirection punchDirection = PunchDirection.Top;
     
     // Punching logic!
     private bool _isPunchFreezeFrameActive = false;
@@ -117,18 +126,18 @@ public class Player : MonoBehaviour
         {
             case 0:
             {
-                switch (_lookDirection)
+                switch (punchDirection)
                 {
-                    case LookDirection.Right:
-                        _animator.SetTrigger("Punch_0_Right");
+                    case PunchDirection.Bottom:
+                        _animator.SetTrigger("Punch_0_Bottom");
                         break;
-                    case LookDirection.Top:
-                        _animator.SetTrigger("Punch_0_Right");
+                    case PunchDirection.Top:
+                        _animator.SetTrigger("Punch_0_Top");
                         break;
-                    case LookDirection.Left:
+                    case PunchDirection.Left:
                         _animator.SetTrigger("Punch_0_Left");
                         break;
-                    case LookDirection.Bottom:
+                    case PunchDirection.Right:
                         _animator.SetTrigger("Punch_0_Right");
                         break;
                 }
@@ -136,18 +145,18 @@ public class Player : MonoBehaviour
             }
             case 1:
             {
-                switch (_lookDirection)
+                switch (punchDirection)
                 {
-                    case LookDirection.Right:
-                        _animator.SetTrigger("Punch_1_Right");
+                    case PunchDirection.Bottom:
+                        _animator.SetTrigger("Punch_1_Bottom");
                         break;
-                    case LookDirection.Top:
-                        _animator.SetTrigger("Punch_1_Right");
+                    case PunchDirection.Top:
+                        _animator.SetTrigger("Punch_1_Top");
                         break;
-                    case LookDirection.Left:
+                    case PunchDirection.Left:
                         _animator.SetTrigger("Punch_1_Left");
                         break;
-                    case LookDirection.Bottom:
+                    case PunchDirection.Right:
                         _animator.SetTrigger("Punch_1_Right");
                         break;
                 }
@@ -155,18 +164,18 @@ public class Player : MonoBehaviour
             }
             case 2:
             {
-                switch (_lookDirection)
+                switch (punchDirection)
                 {
-                    case LookDirection.Right:
-                        _animator.SetTrigger("Punch_2_Right");
+                    case PunchDirection.Bottom:
+                        _animator.SetTrigger("Punch_2_Bottom");
                         break;
-                    case LookDirection.Top:
-                        _animator.SetTrigger("Punch_2_Right");
+                    case PunchDirection.Top:
+                        _animator.SetTrigger("Punch_2_Top");
                         break;
-                    case LookDirection.Left:
+                    case PunchDirection.Left:
                         _animator.SetTrigger("Punch_2_Left");
                         break;
-                    case LookDirection.Bottom:
+                    case PunchDirection.Right:
                         _animator.SetTrigger("Punch_2_Right");
                         break;
                 }
@@ -300,29 +309,66 @@ public class Player : MonoBehaviour
         Debug.Log(_lookDirection);
         Debug.Log("is freeze frame active " + _isPunchFreezeFrameActive);
 
-        //Debug.Log(_lookDirection);
+        Debug.Log(_lookDirection);
         switch (_lookDirection)
         {
             case LookDirection.Left:
                 ResetAnimatorTriggers();
                 _animator.SetTrigger("RunLeft");
+                punchDirection = PunchDirection.Left;
                 break;
             case LookDirection.Right:
                 ResetAnimatorTriggers();
                 _animator.SetTrigger("RunRight");
+                punchDirection = PunchDirection.Right;
                 break;
             case LookDirection.Top:
                 ResetAnimatorTriggers();
                 _animator.SetTrigger("RunTop");
+                punchDirection = PunchDirection.Top;
                 break;
             case LookDirection.Bottom:
                 ResetAnimatorTriggers();
                 _animator.SetTrigger("RunBottom");
+                punchDirection = PunchDirection.Bottom;
                 break;
             case LookDirection.None:
                 ResetAnimatorTriggers();
                 _animator.SetTrigger("Idle");
                 break;
+            default:
+            {
+                switch (punchDirection)
+                {
+                    case PunchDirection.Left:
+                        ResetAnimatorTriggers();
+                        _animator.SetTrigger("RunLeft");
+                        punchDirection = PunchDirection.Left;
+                        break;
+                    case PunchDirection.Right:
+                        ResetAnimatorTriggers();
+                        _animator.SetTrigger("RunRight");
+                        punchDirection = PunchDirection.Right;
+                        break;
+                    case PunchDirection.Top:
+                        ResetAnimatorTriggers();
+                        _animator.SetTrigger("RunTop");
+                        punchDirection = PunchDirection.Top;
+                        break;
+                    case PunchDirection.Bottom:
+                        ResetAnimatorTriggers();
+                        _animator.SetTrigger("RunBottom");
+                        punchDirection = PunchDirection.Bottom;
+                        break;
+                }
+                break;
+            }
+        }
+
+        if (_inputVector.magnitude == 0.0f)
+        {
+            ResetAnimatorTriggers();
+            _animator.SetTrigger("Idle");
         }
     }
 
