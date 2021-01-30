@@ -112,22 +112,64 @@ public class Player : MonoBehaviour
         _isPunchFreezeFrameActive = true;
         
         // ResetAnimatorTriggers();
-        
+
         switch (_punchComboCounter)
         {
             case 0:
             {
-                _animator.SetTrigger("Punch_0_Right");
+                switch (_lookDirection)
+                {
+                    case LookDirection.Right:
+                        _animator.SetTrigger("Punch_0_Right");
+                        break;
+                    case LookDirection.Top:
+                        _animator.SetTrigger("Punch_0_Right");
+                        break;
+                    case LookDirection.Left:
+                        _animator.SetTrigger("Punch_0_Left");
+                        break;
+                    case LookDirection.Bottom:
+                        _animator.SetTrigger("Punch_0_Right");
+                        break;
+                }
                 break;
             }
             case 1:
             {
-                _animator.SetTrigger("Punch_1_Right");
+                switch (_lookDirection)
+                {
+                    case LookDirection.Right:
+                        _animator.SetTrigger("Punch_1_Right");
+                        break;
+                    case LookDirection.Top:
+                        _animator.SetTrigger("Punch_1_Right");
+                        break;
+                    case LookDirection.Left:
+                        _animator.SetTrigger("Punch_1_Left");
+                        break;
+                    case LookDirection.Bottom:
+                        _animator.SetTrigger("Punch_1_Right");
+                        break;
+                }
                 break;
             }
             case 2:
             {
-                _animator.SetTrigger("Punch_2_Right");
+                switch (_lookDirection)
+                {
+                    case LookDirection.Right:
+                        _animator.SetTrigger("Punch_2_Right");
+                        break;
+                    case LookDirection.Top:
+                        _animator.SetTrigger("Punch_2_Right");
+                        break;
+                    case LookDirection.Left:
+                        _animator.SetTrigger("Punch_2_Left");
+                        break;
+                    case LookDirection.Bottom:
+                        _animator.SetTrigger("Punch_2_Right");
+                        break;
+                }
                 break;
             }
         }
