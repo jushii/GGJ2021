@@ -23,10 +23,12 @@ public class Player : MonoBehaviour
     public Rigidbody2D _rb2d;
     public Camera camera;
     public GameObject cameraHolder;
+    public float punchHitBoxSize = 5.0f;
+    public float punchHitBoxSizeBig = 8.0f;
     public float maxSpeed = 10.0f;
     public float currentMaxSpeed;
     public float moveSpeed = 10.0f;
-    public float punchHitBoxOffset = 1.255f;
+    public float punchHitBoxOffset = 3.0f;
     public List<Kid> followers = new List<Kid>();
     public List<Transform> followerPositions;
     public Transform followerPositionsPivot;
@@ -69,10 +71,10 @@ public class Player : MonoBehaviour
         {
             lookVector = _inputVector;
         }
-        else
-        {
-            lookVector = Vector2.zero;
-        }
+        // else
+        // {
+        //     lookVector = Vector2.zero;
+        // }
     }
 
     private void FixedUpdate()
@@ -141,7 +143,7 @@ public class Player : MonoBehaviour
         mask |= 1 << LayerMask.NameToLayer("PromotionGuy");
         float angle = Vector2.Angle(playerPos2D, playerPos2D + lookVector);
         
-        int npcCount = Physics2D.OverlapBoxNonAlloc(playerPos2D + new Vector2(lookVector.x, lookVector.y) * punchHitBoxOffset, Vector2.one * 2.5f, angle, punchedNPCs, mask);
+        int npcCount = Physics2D.OverlapBoxNonAlloc(playerPos2D + new Vector2(lookVector.x, lookVector.y) * punchHitBoxOffset, Vector2.one * punchHitBoxSize, angle, punchedNPCs, mask);
 
         if (npcCount > 0)
         {
@@ -155,6 +157,16 @@ public class Player : MonoBehaviour
             }
         }
 
+
+        if (_punchComboCounter < 2)
+        {
+            ServiceLocator.Current.Get<AudioManager>().PlayLightPunchSFX();
+        }
+        else
+        {
+            ServiceLocator.Current.Get<AudioManager>().PlayHardPunchSFX();
+        }
+        
         _punchComboCounter++;
     }
     
@@ -230,7 +242,7 @@ public class Player : MonoBehaviour
         _animator = GetComponent<Animator>();
         if(lookVector != Vector2.zero)
         {
-            _lookAngle = Mathf.Acos(Vector2.Dot(Vector2.right, lookVector) / lookVector.magnitude);
+            _lookAngle = Mathf.Acos(Vector2.Dot(Vector2.right, _inputVector) / _inputVector.magnitude);
             if(lookVector.y < 0)
             {
                 _lookAngle = 2 * Mathf.PI - _lookAngle;
@@ -295,7 +307,7 @@ public class Player : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireCube(transform.position + new Vector3(lookVector.x, lookVector.y, 0.0f) * punchHitBoxOffset, Vector3.one * 2.0f);
+        Gizmos.DrawWireCube(transform.position + new Vector3(lookVector.x, lookVector.y, 0.0f) * punchHitBoxOffset, Vector3.one * punchHitBoxSize);
     }
 
     public void AddFollower(Kid kid)

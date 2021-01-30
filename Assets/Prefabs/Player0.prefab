@@ -1131,10 +1131,12 @@ MonoBehaviour:
   _rb2d: {fileID: -2721954749470373811}
   camera: {fileID: 5869160183462767592}
   cameraHolder: {fileID: 4969319165093343110}
+  punchHitBoxSize: 5
+  punchHitBoxSizeBig: 8
   maxSpeed: 15
   currentMaxSpeed: 15
   moveSpeed: 100
-  punchHitBoxOffset: 0.5
+  punchHitBoxOffset: 3.25
   followers: []
   followerPositions:
   - {fileID: 2972643785619991643}

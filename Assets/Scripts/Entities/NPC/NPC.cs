@@ -16,7 +16,7 @@ public class NPC : MonoBehaviour
     public Rigidbody2D rigidbody2D;
     public AIManager aiManager;
     public Vector3 spawnPosition;
-    
+    public int receivedHits;
     public bool stunned;
     private Animator _animator;
     private AnimatorControllerParameter tmpParameter;

@@ -11,7 +11,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private PlayerInputManager playerInputManager;
     [SerializeField] private PromotionGuyManager promotionGuyManager;
     [SerializeField] private UIManager uiManager;
-    
+    [SerializeField] private AudioManager audioManager;
+
     [Header("Other")] 
     [SerializeField] private Camera idleCam;
     [SerializeField] private Transform playerSpawn;
@@ -29,6 +30,7 @@ public class GameManager : MonoBehaviour
         ServiceLocator.Current.Register(aiManager);
         ServiceLocator.Current.Register(promotionGuyManager);
         ServiceLocator.Current.Register(uiManager);
+        ServiceLocator.Current.Register(audioManager);
 
         // Setup game services.
         aiManager.Setup();

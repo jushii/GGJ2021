@@ -56,6 +56,7 @@ public class MallWorker_Fly : State
                 flyDirection = (npc.transform.position - _entityManager.players[0].transform.position).normalized;
                 flyNormalDirection = new Vector3(flyDirection.y, -flyDirection.x, 0);           // normal vector of flying direction vector                
                 npc.rigidbody2D.AddForce(flyDirection * flyingSpeed + flyNormalDirection * flyHeight / 3, ForceMode2D.Impulse);
+                // ServiceLocator.Current.Get<AudioManager>().PlayHitSFX();
             }
         }
 
