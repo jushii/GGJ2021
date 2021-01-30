@@ -54,27 +54,27 @@ public class Kid_FollowPlayer : State
             npc.StartFollowing(_followTarget);
         }
         
-        LookForExit();
+        // LookForExit();
     }
 
-    private void LookForExit()
-    {
-        int layerMask = 1 << LayerMask.NameToLayer("Exit");
-        Vector2 kidPosition = npc.transform.position;
-        int foundExitCount = Physics2D.OverlapBoxNonAlloc(kidPosition, Vector2.one * 2.5f, 0.0f, foundExit, layerMask);
-        if (foundExitCount > 0)
-        {
-            for (int i = 0; i < foundExitCount; i++)
-            {
-                if (foundExit[i].TryGetComponent(out Exit exit))
-                {
-                    Kid kid = npc as Kid;
-                    kid.isRescued = true;
-                    
-                    _followedPlayer.RemoveFollower(kid);
-                    _aiManager.ChangeState(npc, typeof(Kid_GoToExit), exit);
-                }
-            }
-        }
-    }
+    // private void LookForExit()
+    // {
+    //     int layerMask = 1 << LayerMask.NameToLayer("Exit");
+    //     Vector2 kidPosition = npc.transform.position;
+    //     int foundExitCount = Physics2D.OverlapBoxNonAlloc(kidPosition, Vector2.one * 2.5f, 0.0f, foundExit, layerMask);
+    //     if (foundExitCount > 0)
+    //     {
+    //         for (int i = 0; i < foundExitCount; i++)
+    //         {
+    //             if (foundExit[i].TryGetComponent(out Exit exit))
+    //             {
+    //                 Kid kid = npc as Kid;
+    //                 kid.isRescued = true;
+    //                 
+    //                 _followedPlayer.RemoveFollower(kid);
+    //                 _aiManager.ChangeState(npc, typeof(Kid_GoToExit), exit);
+    //             }
+    //         }
+    //     }
+    // }
 }
