@@ -35,8 +35,8 @@ public class UIManager : MonoBehaviour, IGameService
 
         uiCanvas.enabled = true;
 
-        timerPanel.transform.DOLocalRotate(new Vector3(0, 0, -2), 1.0f).SetLoops(-1, LoopType.Yoyo);
-        kidsPanel.transform.DOLocalRotate(new Vector3(0, 0, -2), 1.0f).SetLoops(-1, LoopType.Yoyo);
+        // timerPanel.transform.DOLocalRotate(new Vector3(0, 0, -2), 1.0f).SetLoops(-1, LoopType.Yoyo);
+        // kidsPanel.transform.DOLocalRotate(new Vector3(0, 0, -2), 1.0f).SetLoops(-1, LoopType.Yoyo);
     }
 
     private void OnKidCountChanged(object sender, Observable<int>.ChangedEventArgs e)
