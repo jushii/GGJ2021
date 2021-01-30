@@ -3,7 +3,6 @@ using DG.Tweening;
 
 public class NormalCustomer_Fly : State
 {
-
     private readonly EntityManager _entityManager;
     private readonly AIManager _aiManager;
 

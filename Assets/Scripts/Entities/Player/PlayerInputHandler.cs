@@ -13,9 +13,13 @@ public class PlayerInputHandler : MonoBehaviour
 
     public void OnLightPunch(InputAction.CallbackContext context)
     {
-        if (_player != null)
+        if (context.performed)
         {
-            _player.Punch();
+            if (_player != null)
+            {
+                Debug.Log("punch!");
+                _player.Punch();
+            }
         }
     }
 

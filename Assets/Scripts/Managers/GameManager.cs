@@ -51,9 +51,9 @@ public class GameManager : MonoBehaviour
         titleCanvas.GetComponent<CanvasGroup>().DOFade(0.0f, 1.0f);
         
         Sequence startSequence = DOTween.Sequence();
-        startSequence.Insert(0, idleCam.DOOrthoSize(8.0f, 2.0f));
-        startSequence.Insert(0, idleCam.transform.DOMoveX(playerSpawn.transform.position.x, 2.0f));
-        startSequence.Insert(0, idleCam.transform.DOMoveY(playerSpawn.transform.position.y, 2.0f));
+        startSequence.Insert(0, idleCam.DOOrthoSize(8.0f, 1.0f));
+        startSequence.Insert(0, idleCam.transform.DOMoveX(playerSpawn.transform.position.x, 1.0f));
+        startSequence.Insert(0, idleCam.transform.DOMoveY(playerSpawn.transform.position.y, 1.0f));
         startSequence.OnKill(() =>
         {
             GameObject player = Instantiate(playerPrefab, playerSpawn.transform.position, Quaternion.identity);

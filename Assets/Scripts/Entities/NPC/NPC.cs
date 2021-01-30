@@ -94,7 +94,9 @@ public class NPC : MonoBehaviour
         aiPath.SetPath(null);
     }
     
-    public virtual void OnPunch() { }
+    public virtual void OnStartPunch() { }
+    
+    public virtual void OnEndPunch() { }
     
     private void CacheAnimatorParameterIds()
     {

@@ -1,18 +1,11 @@
 ﻿public class MallWorker : NPC
 {
-    //public override void Start()
-    //{
-    //    ServiceLocator.Current.Get<EntityManager>().RegisterNPC(this);
+    public override void OnStartPunch()
+    {
+        aiManager.ChangeState(this, typeof(MallWorker_FreezeFrame));
+    }
 
-    //    spawnPosition = transform.position;
-
-    //    aiManager = ServiceLocator.Current.Get<AIManager>();
-    //    aiManager.SetupNPC(this);
-
-    //    stunned = false;
-    //}
-
-    public override void OnPunch()
+    public override void OnEndPunch()
     {
         aiManager.ChangeState(this, typeof(MallWorker_Fly));
     }

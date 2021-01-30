@@ -13,7 +13,7 @@ public class PromotionGuy : NPC
         stunned = false;
     }
 
-    public override void OnPunch()
+    public override void OnStartPunch()
     {
         if (state.GetType() == typeof(PromotionGuy_RunAwayWithKid))
         {

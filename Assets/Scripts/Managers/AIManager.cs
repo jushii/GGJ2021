@@ -23,6 +23,7 @@ public class AIManager :  MonoBehaviour, IGameService
         normalCustomer.availableStates.Add(typeof(NormalCustomer_Idle));
         normalCustomer.availableStates.Add(typeof(NormalCustomer_Fly));
         normalCustomer.availableStates.Add(typeof(NormalCustomer_WalkToSpawnPosition));
+        normalCustomer.availableStates.Add(typeof(NormalCustomer_FreezeFrame));
 
         NPC_GenerationParameters kid = new NPC_GenerationParameters();
         kid.startingState = typeof(Kid_Idle);
@@ -36,7 +37,8 @@ public class AIManager :  MonoBehaviour, IGameService
         mallWorker.availableStates.Add(typeof(MallWorker_Idle));
         mallWorker.availableStates.Add(typeof(MallWorker_FollowPlayer));
         mallWorker.availableStates.Add(typeof(MallWorker_Fly));
-        
+        mallWorker.availableStates.Add(typeof(MallWorker_FreezeFrame));
+
         NPC_GenerationParameters promotionGuy = new NPC_GenerationParameters();
         promotionGuy.startingState = typeof(PromotionGuy_Idle);
         promotionGuy.availableStates.Add(typeof(PromotionGuy_Idle));

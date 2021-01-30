@@ -19,38 +19,41 @@ public enum LookDirection
 
 public class Player : MonoBehaviour
 {
-    public float maxSpeed = 10.0f;
-    public float currentMaxSpeed;
-    public float moveSpeed = 10.0f;
-    private Vector2 _inputVector = Vector2.zero;
     public Vector2 lookVector = Vector2.zero;
-    private Vector2 _velocity = Vector2.zero;
     public Rigidbody2D _rb2d;
     public Camera camera;
     public GameObject cameraHolder;
-    private Tweener _cameraShakeTween;
-    
+    public float maxSpeed = 10.0f;
+    public float currentMaxSpeed;
+    public float moveSpeed = 10.0f;
     public float punchHitBoxOffset = 1.255f;
-
+    public List<Kid> followers = new List<Kid>();
+    public List<Transform> followerPositions;
+    public Transform followerPositionsPivot;
+    public Observable<int> kidCount = new Observable<int>();
+    
+    private Vector2 _velocity = Vector2.zero;
+    private Tweener _cameraShakeTween;
     private Collider2D[] punchedNPCs = new Collider2D[30];
     private Collider2D[] nearbyNPCs = new Collider2D[5];
     private LayerMask mask;
     private int _punchFrameTime = 1;
     private int _punchFrameTimer;
-    
+    private Vector2 _inputVector = Vector2.zero;
     private Animator _animator;
     private AnimatorControllerParameter _tmpParameter;
     private List<int> _cachedParameterIds = new List<int>();
-
+    private Dictionary<Kid, Transform> _reservedFollowerPositions = new Dictionary<Kid, Transform>();
     private float _lookAngle = 0.0f;        // player's looking direction angle in radian ranged from 0 to 2*Pi
     private float _angleDivider = 45.0f;
     private LookDirection _lookDirection = LookDirection.Right;
-    public List<Kid> followers = new List<Kid>();
-    public List<Transform> followerPositions;
-    private Dictionary<Kid, Transform> _reservedFollowerPositions = new Dictionary<Kid, Transform>();
-    public Transform followerPositionsPivot;
-
-    public Observable<int> kidCount = new Observable<int>();
+    
+    // Punching logic!
+    private bool _isPunchFreezeFrameActive = false;
+    private bool _automaticPunchQueued = false;
+    private int _punchComboCounter;
+    private bool _isPunchAnimationPlaying;
+    private List<NPC> _punchedNPCs = new List<NPC>();
     
     private void Start()
     {
@@ -85,28 +88,105 @@ public class Player : MonoBehaviour
             _rb2d.velocity = Vector2.ClampMagnitude(_rb2d.velocity, currentMaxSpeed);
         }
     }
-
+    
     public void Punch()
     {
-        _punchFrameTimer = _punchFrameTime;
+        if (_isPunchFreezeFrameActive)
+        {
+            // If we press punch while we're punching (not finished with the punch) we can queue automatic punch.
+            // This is a "feel good" thing.
+            // Debug.Log("automatic punch queued");
+            if (_punchComboCounter < 3)
+            {
+                _automaticPunchQueued = true;
+            }
+            return;
+        }
         
+        _isPunchAnimationPlaying = true;
+        
+        // Reset automatic queue.
+        
+        _isPunchFreezeFrameActive = true;
+        
+        // ResetAnimatorTriggers();
+        
+        switch (_punchComboCounter)
+        {
+            case 0:
+            {
+                _animator.SetTrigger("Punch_0_Right");
+                break;
+            }
+            case 1:
+            {
+                _animator.SetTrigger("Punch_1_Right");
+                break;
+            }
+            case 2:
+            {
+                _animator.SetTrigger("Punch_2_Right");
+                break;
+            }
+        }
+        
+        _automaticPunchQueued = false;
+    }
+
+    public void StartPunch()
+    {
+        Vector2 playerPos2D = new Vector2(transform.position.x, transform.position.y);
+
         mask = 1 << LayerMask.NameToLayer("NPC");
         mask |= 1 << LayerMask.NameToLayer("PromotionGuy");
-        Vector2 playerPos2D = new Vector2(transform.position.x, transform.position.y);
         float angle = Vector2.Angle(playerPos2D, playerPos2D + lookVector);
         
-        int punchedNpcCount = Physics2D.OverlapBoxNonAlloc(playerPos2D + new Vector2(lookVector.x, lookVector.y) * punchHitBoxOffset, Vector2.one * 2.5f, angle, punchedNPCs, mask);
+        int npcCount = Physics2D.OverlapBoxNonAlloc(playerPos2D + new Vector2(lookVector.x, lookVector.y) * punchHitBoxOffset, Vector2.one * 2.5f, angle, punchedNPCs, mask);
 
-        if (punchedNpcCount > 0)
+        if (npcCount > 0)
         {
-            for (int i = 0; i < punchedNpcCount; i++)
+            for (int i = 0; i < npcCount; i++)
             {
                 if (punchedNPCs[i].TryGetComponent(out NPC npc))
                 {
-                    npc.OnPunch();
+                    npc.OnStartPunch();
+                    _punchedNPCs.Add(npc);
                 }
             }
         }
+
+        _punchComboCounter++;
+    }
+    
+    public void EndPunch()
+    {
+        _isPunchFreezeFrameActive = false;
+
+        // We can now start second punch if we try to combo
+        // (if we're too late to press punch, we will trigger EndPunchAnimation and can't combo anymore)
+        foreach (NPC punchedNPC in _punchedNPCs)
+        {
+            punchedNPC.OnEndPunch();
+        }
+
+        _punchedNPCs.Clear();
+        
+        // If we have tapped punch button during the previous punch. Do automatic another punch.
+        if (_automaticPunchQueued)
+        {
+            Punch();
+        }
+    }
+
+    public void EndPunchAnimation()
+    {
+        _isPunchFreezeFrameActive = false;
+        _isPunchAnimationPlaying = false;
+
+        // _animator.SetTrigger("Idle");
+      
+        RunAnimation();
+        _punchComboCounter = 0;
     }
 
     private void UpdateMovementSpeed()
@@ -114,11 +194,11 @@ public class Player : MonoBehaviour
         int layerMask = 1 << LayerMask.NameToLayer("NPC");
         int count = Physics2D.OverlapCircleNonAlloc(transform.position, 0.1f, nearbyNPCs, layerMask);
 
-        // if (_punchFrameTimer > 0)
-        // {
-        //     currentMaxSpeed = 0.0f;
-        //     return;
-        // }
+        if (_isPunchFreezeFrameActive)
+        {
+            currentMaxSpeed = 0.0f;
+            return;
+        }
         
         if (count > 0)
         {
@@ -142,6 +222,11 @@ public class Player : MonoBehaviour
 
     public void RunAnimation()
     {
+        if (_isPunchAnimationPlaying)
+        {
+            return;
+        }
+        
         _animator = GetComponent<Animator>();
         if(lookVector != Vector2.zero)
         {
@@ -157,6 +242,9 @@ public class Player : MonoBehaviour
         {
             _lookDirection = LookDirection.None;
         }
+        
+        Debug.Log(_lookDirection);
+        Debug.Log("is freeze frame active " + _isPunchFreezeFrameActive);
 
         //Debug.Log(_lookDirection);
         switch (_lookDirection)
