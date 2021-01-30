@@ -9,15 +9,18 @@ namespace Entities.NPC.States
         private readonly AIManager _aiManager;
 
         private Vector3 flyDirection;
+        private Vector3 flyNormalDirection;
         private float stillSpeed = 1f;
-        private float flyingSpeed = 10f;
-        private float flyHeight = 5f;
+        private float flyingSpeed = 25f;
+        private float flyHeightCounter;
+        private float flyHeight = 15f;
         private bool _flyStarted;
         private float _freezeTimer;
         // private float _freezeTime = 0.15f;
         private float _freezeTime = 0.05f;
         private float _stunnedTimer;
         private float _stunnedTime = 1.5f;
+        private float _timeMultiplier = 5f;
 
         private int flyingAnimationType;
         
@@ -33,6 +36,7 @@ namespace Entities.NPC.States
             _freezeTimer = _freezeTime;
             ((NormalCustomer)npc).stunned = false;
             _stunnedTimer = _stunnedTime;
+            flyHeightCounter = flyHeight;
             
             npc.StopFollowing();
             npc.aiPath.rvoDensityBehavior.enabled = false;
@@ -52,9 +56,11 @@ namespace Entities.NPC.States
                     _flyStarted = true;
 
                     flyDirection = (npc.transform.position - _entityManager.players[0].transform.position).normalized;
-                    //npc.rigidbody2D.AddForce(flyDirection.normalized * flyingSpeed, ForceMode2D.Impulse);
+                    flyNormalDirection = new Vector3(flyDirection.y, -flyDirection.x, 0);
+                    npc.rigidbody2D.AddForce(flyDirection * flyingSpeed + flyNormalDirection * flyHeight/2, ForceMode2D.Impulse);
 
-                    npc.rigidbody2D.DOJump(npc.transform.position + flyDirection * flyingSpeed, flyHeight, 1, 1f);    
+                    
+                    //npc.rigidbody2D.DOJump(npc.transform.position + flyDirection * flyingSpeed, 5f, 1, 1f);    
                 }
             }
 
@@ -67,18 +73,21 @@ namespace Entities.NPC.States
 
                     if (((NormalCustomer)npc).stunned)
                     {
-                        //_stunnedTimer -= Time.deltaTime;
-                        //if(_stunnedTimer <= 0)
-                        //{
                         ((NormalCustomer)npc).ResetAnimatorTriggers();
                         ((NormalCustomer)npc).Animator.SetTrigger("Idle");
 
                         _aiManager.ChangeState(npc, typeof(NormalCustomer_Idle));
-                        //}
                     }
                 }
                 else
                 {
+                    npc.rigidbody2D.AddForce(-flyNormalDirection * flyHeightCounter, ForceMode2D.Force);
+                    flyHeightCounter -= _timeMultiplier * Time.deltaTime;
+                    if (flyHeightCounter <= 0)
+                    {
+                        flyHeightCounter = 0;
+                    }
+
                     ((NormalCustomer)npc).ResetAnimatorTriggers();
 
                     ((NormalCustomer)npc).stunned = true;
