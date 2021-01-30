@@ -15,8 +15,8 @@ public class NPC : MonoBehaviour
     public Rigidbody2D rigidbody2D;
     public AIManager aiManager;
     public Vector3 spawnPosition;
-    
-    private void Start()
+
+    public virtual void Start()
     {
         ServiceLocator.Current.Get<EntityManager>().RegisterNPC(this);
 
@@ -24,6 +24,7 @@ public class NPC : MonoBehaviour
         
         aiManager = ServiceLocator.Current.Get<AIManager>();
         aiManager.SetupNPC(this);
+
     }
 
     public void MoveTo(Vector3 position)
