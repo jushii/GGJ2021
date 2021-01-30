@@ -38,12 +38,7 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if (!_isGameStarted &&
-            Keyboard.current.anyKey.wasPressedThisFrame ||
-            Gamepad.current.aButton.wasPressedThisFrame ||
-            Gamepad.current.bButton.wasPressedThisFrame ||
-            Gamepad.current.yButton.wasPressedThisFrame ||
-            Gamepad.current.xButton.wasPressedThisFrame)
+        if (!_isGameStarted && Keyboard.current.anyKey.wasPressedThisFrame)
         {
             StartGame();
         }
