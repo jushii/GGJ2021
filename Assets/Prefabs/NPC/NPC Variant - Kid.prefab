@@ -20,6 +20,7 @@ MonoBehaviour:
   rigidbody2D: {fileID: 8856704927298391441}
   aiManager: {fileID: 0}
   spawnPosition: {x: 0, y: 0, z: 0}
+  sprite: {fileID: 8427556652193949440}
   isRescued: 0
 --- !u!1001 &2391855693797890489
 PrefabInstance:
@@ -38,7 +39,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9163449290651758, guid: aa6dcc2d0c8ec74439c68b2c70ce2f36, type: 3}
       propertyPath: maxSpeed
-      value: 30
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 9163449290651758, guid: aa6dcc2d0c8ec74439c68b2c70ce2f36, type: 3}
       propertyPath: maxAcceleration
@@ -66,7 +67,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9163449290651758, guid: aa6dcc2d0c8ec74439c68b2c70ce2f36, type: 3}
       propertyPath: rvoDensityBehavior.progressAverage
-      value: 0.98226315
+      value: 0.9999993
       objectReference: {fileID: 0}
     - target: {fileID: 9163449290651758, guid: aa6dcc2d0c8ec74439c68b2c70ce2f36, type: 3}
       propertyPath: rvoDensityBehavior.densityThreshold
@@ -117,8 +118,12 @@ PrefabInstance:
       value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 7843212620631439375, guid: aa6dcc2d0c8ec74439c68b2c70ce2f36, type: 3}
+      propertyPath: priority
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7843212620631439375, guid: aa6dcc2d0c8ec74439c68b2c70ce2f36, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7843212620631439375, guid: aa6dcc2d0c8ec74439c68b2c70ce2f36, type: 3}
       propertyPath: collidesWith
@@ -205,7 +210,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 2391855693797890489}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8889701612078544681}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 560112f876f5746c780eca0d404e7139, type: 3}
   m_Name: 
@@ -237,3 +242,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94ae50474d9344198312a08aa02a2bd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &8427556652193949440 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6180387894273883833, guid: aa6dcc2d0c8ec74439c68b2c70ce2f36, type: 3}
+  m_PrefabInstance: {fileID: 2391855693797890489}
+  m_PrefabAsset: {fileID: 0}

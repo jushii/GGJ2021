@@ -74,6 +74,18 @@ public class Player : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        for (int i = 0; i < followers.Count; i++)
+        {
+            Kid kid = followers[i];
+            if (kid.state.GetType() == typeof(Kid_FollowPromotionGuy))
+            {
+                Debug.Log("stop");
+            }
+        }
+    }
+
     private void FixedUpdate()
     {
         UpdateMovementSpeed();

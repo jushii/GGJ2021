@@ -48,6 +48,15 @@ public class PromotionGuyManager : MonoBehaviour, IGameService
         _promotionGuysInPrison.Add(promotionGuy);
     }
     
+    public void SendOnePromotionGuyToPrison()
+    {
+        PromotionGuy promotionGuy = _promotionGuysInWild[0];
+        _promotionGuysInWild.Remove(promotionGuy);
+        _aiManager.ChangeState(promotionGuy, typeof(PromotionGuy_Idle));
+        promotionGuy.aiPath.Teleport(prisonTelerportPoint.position);
+        _promotionGuysInPrison.Add(promotionGuy);
+    }
+    
     public void SendAllPromotionGuysToPrison()
     {
         foreach (PromotionGuy promotionGuy in _promotionGuysInWild)

@@ -16,6 +16,7 @@ public class NPC : MonoBehaviour
     public Rigidbody2D rigidbody2D;
     public AIManager aiManager;
     public Vector3 spawnPosition;
+    public GameObject sprite;
     
     private void Start()
     {
