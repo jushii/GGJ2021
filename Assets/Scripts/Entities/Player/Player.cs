@@ -51,11 +51,11 @@ public class Player : MonoBehaviour
     public List<Transform> followerPositions;
     private Dictionary<Kid, Transform> _reservedFollowerPositions = new Dictionary<Kid, Transform>();
     public Transform followerPositionsPivot;
+
+    public Observable<int> kidCount = new Observable<int>();
     
     private void Start()
     {
-        ServiceLocator.Current.Get<EntityManager>().RegisterPlayer(this);
-
         _animator = GetComponent<Animator>();
         CacheAnimatorParameterIds();
     }
@@ -213,11 +213,13 @@ public class Player : MonoBehaviour
     public void AddFollower(Kid kid)
     {
         followers.Add(kid);
+        kidCount.Value = followers.Count;
     }
 
     public void RemoveFollower(Kid kid)
     {
         followers.Remove(kid);
+        kidCount.Value = followers.Count;
     }
     
     public Transform GetKidFollowTarget(Kid kid)
