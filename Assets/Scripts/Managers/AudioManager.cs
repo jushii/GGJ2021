@@ -7,6 +7,7 @@ public class AudioManager : MonoBehaviour, IGameService
     public List<AudioClip> lightPunchClips;
     public List<AudioClip> hardPunchClips;
     public List<AudioClip> hitClips;
+    public List<AudioClip> screamClips;
 
     public void PlayLightPunchSFX()
     {
@@ -29,6 +30,14 @@ public class AudioManager : MonoBehaviour, IGameService
         AudioSource source = _sfxSources[Random.Range(0, _sfxSources.Count)];
         source.pitch = Random.Range(0.9f, 1.1f);
         AudioClip clip = hitClips[Random.Range(0, hitClips.Count)];
+        source.PlayOneShot(clip);
+    }
+
+    public void PlayScreamSFX()
+    {
+        AudioSource source = _sfxSources[Random.Range(0, _sfxSources.Count)];
+        source.pitch = Random.Range(0.9f, 1.1f);
+        AudioClip clip = screamClips[Random.Range(0, screamClips.Count)];
         source.PlayOneShot(clip);
     }
 }

@@ -34,6 +34,10 @@ public class MallWorker_FreezeFrame : State
         Debug.Log("NPC RECEIVED HITS: " + npc.receivedHits);
         
         ServiceLocator.Current.Get<AudioManager>().PlayHitSFX();
+        if (npc.receivedHits >= 3)
+        {
+            ServiceLocator.Current.Get<AudioManager>().PlayScreamSFX();
+        }
         npc.aiPath.canMove = false;
         knockbackTimer = Time.frameCount;
         exitStateTimer = 0;
