@@ -22,6 +22,11 @@ MonoBehaviour:
   spawnPosition: {x: 0, y: 0, z: 0}
   receivedHits: 0
   stunned: 0
+  spriteRenderer: {fileID: 6292375388878863299}
+  topHitSprites: []
+  bottomHitSprites: []
+  leftHitSprites: []
+  rightHitSprites: []
 --- !u!1001 &7993739081960475519
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -35,7 +40,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9163449290651758, guid: aa6dcc2d0c8ec74439c68b2c70ce2f36, type: 3}
       propertyPath: radius
-      value: 0.1
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 9163449290651758, guid: aa6dcc2d0c8ec74439c68b2c70ce2f36, type: 3}
       propertyPath: maxSpeed
@@ -47,15 +52,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4160329091790254268, guid: aa6dcc2d0c8ec74439c68b2c70ce2f36, type: 3}
       propertyPath: m_Color.b
-      value: 0.0414661
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4160329091790254268, guid: aa6dcc2d0c8ec74439c68b2c70ce2f36, type: 3}
       propertyPath: m_Color.g
-      value: 0.5566038
+      value: 0.0773196
       objectReference: {fileID: 0}
     - target: {fileID: 4160329091790254268, guid: aa6dcc2d0c8ec74439c68b2c70ce2f36, type: 3}
       propertyPath: m_Color.r
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6180387894273883833, guid: aa6dcc2d0c8ec74439c68b2c70ce2f36, type: 3}
       propertyPath: m_Layer
@@ -83,7 +88,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7843212620631439375, guid: aa6dcc2d0c8ec74439c68b2c70ce2f36, type: 3}
       propertyPath: maxNeighbours
-      value: 50
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 8206840239263970951, guid: aa6dcc2d0c8ec74439c68b2c70ce2f36, type: 3}
       propertyPath: m_LocalPosition.y
@@ -190,3 +195,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94ae50474d9344198312a08aa02a2bd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!212 &6292375388878863299 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 4160329091790254268, guid: aa6dcc2d0c8ec74439c68b2c70ce2f36, type: 3}
+  m_PrefabInstance: {fileID: 7993739081960475519}
+  m_PrefabAsset: {fileID: 0}

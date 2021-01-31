@@ -18,6 +18,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Transform playerSpawn;
     [SerializeField] private GameObject playerPrefab;
     [SerializeField] private Canvas titleCanvas;
+
+    public static Action onPlayerSpawned;
     
     public bool _isGameStarted;
     
@@ -61,7 +63,8 @@ public class GameManager : MonoBehaviour
             GameObject player = Instantiate(playerPrefab, playerSpawn.transform.position, Quaternion.identity);
             Player p = player.GetComponent<Player>();
             ServiceLocator.Current.Get<EntityManager>().RegisterPlayer(p);
-            
+            onPlayerSpawned?.Invoke();
+
             idleCam.enabled = false;
             uiManager.OnStartGame();
         });

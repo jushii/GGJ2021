@@ -41,6 +41,7 @@ MonoBehaviour:
   spawnPosition: {x: 0, y: 0, z: 0}
   receivedHits: 0
   stunned: 0
+  spriteRenderer: {fileID: 3193378122590583266}
 --- !u!1001 &1580021573574871390
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -70,11 +71,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4160329091790254268, guid: aa6dcc2d0c8ec74439c68b2c70ce2f36, type: 3}
       propertyPath: m_Color.g
-      value: 1
+      value: 0.47117767
       objectReference: {fileID: 0}
     - target: {fileID: 4160329091790254268, guid: aa6dcc2d0c8ec74439c68b2c70ce2f36, type: 3}
       propertyPath: m_Color.r
-      value: 1
+      value: 0.33490568
       objectReference: {fileID: 0}
     - target: {fileID: 6516432204732116624, guid: aa6dcc2d0c8ec74439c68b2c70ce2f36, type: 3}
       propertyPath: m_Name
@@ -189,3 +190,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94ae50474d9344198312a08aa02a2bd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!212 &3193378122590583266 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 4160329091790254268, guid: aa6dcc2d0c8ec74439c68b2c70ce2f36, type: 3}
+  m_PrefabInstance: {fileID: 1580021573574871390}
+  m_PrefabAsset: {fileID: 0}

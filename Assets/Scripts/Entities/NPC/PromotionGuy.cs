@@ -21,12 +21,20 @@ public class PromotionGuy : NPC
             Kid kid = runAwayState.followerKid;
             aiManager.ChangeState(kid, typeof(Kid_FollowPlayer), ServiceLocator.Current.Get<EntityManager>().players[0]);
         }
-        
-        aiManager.ChangeState(this, typeof(PromotionGuy_FreezeFrame));
+
+        aiPath.canMove = false;
+        // aiManager.ChangeState(this, typeof(PromotionGuy_FreezeFrame));
     }
 
     public override void OnEndPunch()
     {
-        aiManager.ChangeState(this, typeof(PromotionGuy_Fly));
+        // if (receivedHits >= 2)
+        // {
+        //     aiManager.ChangeState(this, typeof(PromotionGuy_Fly));
+        // }
+        // else
+        // {
+            aiManager.ChangeState(this, typeof(PromotionGuy_FreezeFrame));
+        // }
     }
 }

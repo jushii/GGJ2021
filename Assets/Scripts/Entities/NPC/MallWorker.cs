@@ -2,11 +2,19 @@
 {
     public override void OnStartPunch()
     {
-        aiManager.ChangeState(this, typeof(MallWorker_FreezeFrame));
+        aiPath.canMove = false;
+        // aiManager.ChangeState(this, typeof(MallWorker_FreezeFrame));
     }
 
     public override void OnEndPunch()
     {
-        aiManager.ChangeState(this, typeof(MallWorker_Fly));
+        // if (receivedHits >= 2)
+        // {
+        //     aiManager.ChangeState(this, typeof(MallWorker_Fly));
+        // }
+        // else
+        // {
+            aiManager.ChangeState(this, typeof(MallWorker_FreezeFrame));
+        // }
     }
 }
