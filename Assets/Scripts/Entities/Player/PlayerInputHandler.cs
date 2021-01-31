@@ -13,6 +13,11 @@ public class PlayerInputHandler : MonoBehaviour
 
     public void OnLightPunch(InputAction.CallbackContext context)
     {
+        if (GameManager.isGameOver)
+        {
+            return;
+        }
+        
         if (context.performed)
         {
             if (_player != null)
@@ -25,6 +30,11 @@ public class PlayerInputHandler : MonoBehaviour
 
     public void OnMove(InputAction.CallbackContext context)
     {
+        if (GameManager.isGameOver)
+        {
+            return;
+        }
+        
         if (_player != null)
         {
             _player.SetInputVector(context.ReadValue<Vector2>());
