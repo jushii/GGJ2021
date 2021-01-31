@@ -11,6 +11,8 @@ public class Kid_Idle : State
     
     public override void OnEnter(object args = null)
     {
+        Kid k = npc as Kid;
+        k.PlayIdleAnimation();
     }
 
     public override void OnExit()
