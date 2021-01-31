@@ -4,9 +4,13 @@ public class Kid_Idle : State
 {
     private readonly AIManager _aiManager;
     private Collider2D[] foundPlayer = new Collider2D[2];
+    private float speechBubbleTimer = 0;
+    private float speechBubbleTime;
+    
     public Kid_Idle()
     {
         _aiManager = ServiceLocator.Current.Get<AIManager>();
+        speechBubbleTime = Random.Range(3, 6);
     }
     
     public override void OnEnter(object args = null)
@@ -21,6 +25,19 @@ public class Kid_Idle : State
 
     public override void OnUpdate()
     {
+        speechBubbleTimer += (1.0f * Time.deltaTime);
+        if (speechBubbleTimer > speechBubbleTime)
+        {
+            Vector3 kidPosition = npc.transform.position;
+            
+            // TODO: Instantiate sprite at kid position.
+            
+            
+            // Destroy(sprite.gameObject, 2);
+            
+            speechBubbleTimer = 0.0f;
+        }
+        
         LookForPlayer();
     }
 

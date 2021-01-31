@@ -31,6 +31,8 @@ public class PromotionGuy_ChaseKid : State
 
     public override void OnUpdate()
     {
+        // TODO: SPEECH BUBBLE!!!!!
+        
         if (_followedKid != null && _followedKid.isRescued)
         {
             _followedKid = null;
