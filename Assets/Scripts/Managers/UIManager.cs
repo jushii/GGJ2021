@@ -24,6 +24,12 @@ public class UIManager : MonoBehaviour, IGameService
     public void Setup()
     {
         _entityManager = ServiceLocator.Current.Get<EntityManager>();
+        GameManager.gameTimeChanged += OnGameTimeChanged;
+    }
+
+    private void OnGameTimeChanged(string obj)
+    {
+        timerLabel.text = obj;
     }
 
     public void OnStartGame()
