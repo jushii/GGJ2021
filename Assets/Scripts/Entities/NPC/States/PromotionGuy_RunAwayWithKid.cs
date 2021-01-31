@@ -26,7 +26,7 @@ public class PromotionGuy_RunAwayWithKid : State
     public override void OnExit()
     {
         followerKid = null;
-        npc.aiPath.maxSpeed = 3;
+        // npc.aiPath.maxSpeed = 3;
         npc.ClearPath();
     }
 
@@ -53,6 +53,6 @@ public class PromotionGuy_RunAwayWithKid : State
         FleePath fleePath = FleePath.Construct(npc.transform.position, player.transform.position, 1000 * 100);
         npc.aiPath.SetPath(fleePath);
         npc.aiPath.canMove = true;
-        npc.aiPath.maxSpeed = 3;
+        // npc.aiPath.maxSpeed = 3;
     }
 }

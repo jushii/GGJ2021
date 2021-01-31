@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class NormalCustomer_FreezeFrame : State
+public class PromotionGuy_FreezeFrame : State
 {
     public override void OnEnter(object args = null)
     {

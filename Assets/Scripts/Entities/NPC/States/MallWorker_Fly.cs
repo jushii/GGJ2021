@@ -42,6 +42,7 @@ public class MallWorker_Fly : State
 
     public override void OnExit()
     {
+        npc.receivedHits = 0;
     }
 
     public override void OnUpdate()

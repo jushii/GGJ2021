@@ -4,4 +4,9 @@
     {
        aiManager.ChangeState(this, typeof(NormalCustomer_FreezeFrame));
     }
+
+    public override void OnEndPunch()
+    {
+        aiManager.ChangeState(this, typeof(NormalCustomer_Fly));
+    }
 }
