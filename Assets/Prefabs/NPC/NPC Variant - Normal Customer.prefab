@@ -8,7 +8,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5729240286196623310}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: d257f7d081d6187438bf27c7345166e1, type: 2}
   m_CullingMode: 0
@@ -77,7 +77,7 @@ PrefabInstance:
     - target: {fileID: 4160329091790254268, guid: aa6dcc2d0c8ec74439c68b2c70ce2f36, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: bfdd67d11ef7efc4a839945e3f328ec5, type: 3}
+      objectReference: {fileID: 21300000, guid: e96e3d2ca19ca4e419ef0672de53394a, type: 3}
     - target: {fileID: 6516432204732116624, guid: aa6dcc2d0c8ec74439c68b2c70ce2f36, type: 3}
       propertyPath: m_Name
       value: NPC Variant - Normal Customer

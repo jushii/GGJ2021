@@ -96,8 +96,7 @@ public class NormalCustomer_FreezeFrame : State
         exitStateTimer += (1.0f * Time.deltaTime);
         if (exitStateTimer > exitStateTime)
         {
-            // TODO: Change sprite back to idle sprite!
-            //npc.spriteRenderer.sprite = npc.idleSprite;
+            npc.spriteRenderer.sprite = npc.idleSprite;
             ServiceLocator.Current.Get<AIManager>().ChangeState(npc, typeof(NormalCustomer_Idle));
         }
     }
