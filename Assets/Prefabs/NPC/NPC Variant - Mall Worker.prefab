@@ -8,7 +8,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5729240286196623310}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: d257f7d081d6187438bf27c7345166e1, type: 2}
   m_CullingMode: 0
@@ -42,6 +42,19 @@ MonoBehaviour:
   receivedHits: 0
   stunned: 0
   spriteRenderer: {fileID: 3193378122590583266}
+  topHitSprites:
+  - {fileID: 21300000, guid: 212d7d5078794734d8edd5edc818ed67, type: 3}
+  - {fileID: 21300000, guid: 4c31e65bd86e18f4da9f4a79fe1d911a, type: 3}
+  bottomHitSprites:
+  - {fileID: 21300000, guid: 6ab06fd7cbc424942ae9b4980dba32db, type: 3}
+  - {fileID: 21300000, guid: 550e7d29288afb04cb5d7b45ed3beb7e, type: 3}
+  leftHitSprites:
+  - {fileID: 21300000, guid: 4a983d297067ca24a9402bc4ef760e0f, type: 3}
+  - {fileID: 21300000, guid: e5cc46a295eadd24fa85d42658a390ff, type: 3}
+  rightHitSprites:
+  - {fileID: 21300000, guid: 7caca5b58ab52e440b0d5ba40cbd17c5, type: 3}
+  - {fileID: 21300000, guid: 712e6902d2d43e144a39a505227b023a, type: 3}
+  idleSprite: {fileID: 21300000, guid: e96e3d2ca19ca4e419ef0672de53394a, type: 3}
 --- !u!1001 &1580021573574871390
 PrefabInstance:
   m_ObjectHideFlags: 0

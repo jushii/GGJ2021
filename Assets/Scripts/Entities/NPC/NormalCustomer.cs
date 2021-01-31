@@ -14,7 +14,7 @@
         // }
         // else
         // {
-            aiManager.ChangeState(this, typeof(NormalCustomer_FreezeFrame));
+        aiManager.ChangeState(this, typeof(NormalCustomer_FreezeFrame));
         // }
     }
 }
