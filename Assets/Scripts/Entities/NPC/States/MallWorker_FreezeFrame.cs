@@ -37,6 +37,8 @@ public class MallWorker_FreezeFrame : State
         npc.aiPath.canMove = false;
         knockbackTimer = Time.frameCount;
         exitStateTimer = 0;
+
+        npc.stunned = true;
     }
 
     public override void OnExit()
@@ -63,7 +65,8 @@ public class MallWorker_FreezeFrame : State
                         _hitAngle = 2 * Mathf.PI - _hitAngle;
                     }
 
-                    _hitDirection = (HitDirection)Mathf.RoundToInt(_hitAngle * Mathf.Rad2Deg / _angleDivider);
+                    _hitAngle %= 2 * Mathf.PI;
+                    _hitDirection = (HitDirection)(Mathf.RoundToInt(_hitAngle * Mathf.Rad2Deg / _angleDivider) % 4);
                 }
                 else
                 {
@@ -95,6 +98,7 @@ public class MallWorker_FreezeFrame : State
         if (exitStateTimer > exitStateTime)
         {
             npc.spriteRenderer.sprite = npc.idleSprite;
+            npc.stunned = false;
             ServiceLocator.Current.Get<AIManager>().ChangeState(npc, typeof(MallWorker_Idle));
         }
     }

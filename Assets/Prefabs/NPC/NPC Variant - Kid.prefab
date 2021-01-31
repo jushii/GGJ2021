@@ -324,6 +324,7 @@ MonoBehaviour:
   bottomHitSprites: []
   leftHitSprites: []
   rightHitSprites: []
+  idleSprite: {fileID: 0}
   followerKid: {fileID: 0}
   kidModelPivot: {fileID: 8427556652193949440}
   kidAnimator: {fileID: 0}
@@ -340,4 +341,15 @@ MonoBehaviour:
   - {fileID: 5566302637577753064, guid: 69ad69b8907bdcf4aa19ab7cfdb8340c, type: 3}
   - {fileID: 7547772985922869040, guid: 731d42f652cd8e7408175436352d936d, type: 3}
   - {fileID: 445787321974787555, guid: 89fa446c89024cc439a05a218ac831ba, type: 3}
+  speechBubbleSprites:
+  - {fileID: 21300000, guid: a25656a2aef7a534bb7026ba8e8cd1c3, type: 3}
+  - {fileID: 21300000, guid: 1a8bf1f93b745a4439033ae45bda0d5b, type: 3}
+  - {fileID: 21300000, guid: 0090ffb8c5c68164f8de0c8819d4e40d, type: 3}
+  - {fileID: 21300000, guid: 1e303f9842bbc574c9702ed61d9763a2, type: 3}
+  - {fileID: 21300000, guid: 6b22f2e2ade99554ab12d0d99ba8d65b, type: 3}
+  - {fileID: 21300000, guid: 7b1eeb05a13b87443994c013f2bded03, type: 3}
+  - {fileID: 21300000, guid: 02b94d72cb543fd45b4e510a6dcbf8ed, type: 3}
+  - {fileID: 21300000, guid: 1bd9cc523f53aa442aaf43da62c90d29, type: 3}
+  - {fileID: 21300000, guid: 012f76201e346824da9e559ff02173eb, type: 3}
+  speechBubbleSpriteRenderer: {fileID: 0}
   isRescued: 0

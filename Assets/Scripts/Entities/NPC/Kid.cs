@@ -11,7 +11,10 @@ public class Kid : NPC
     private AnimatorControllerParameter _tmpParameterKid;
     private List<int> _kidAnimationParemeterIDs = new List<int>();
 
+    public List<Sprite> speechBubbleSprites;
+
     public bool isRescued;
+
     public override void Start()
     {
         ServiceLocator.Current.Get<EntityManager>().RegisterNPC(this);

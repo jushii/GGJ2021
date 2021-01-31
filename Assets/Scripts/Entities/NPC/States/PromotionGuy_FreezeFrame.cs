@@ -37,11 +37,15 @@ public class PromotionGuy_FreezeFrame : State
         npc.aiPath.canMove = false;
         knockbackTimer = Time.frameCount;
         exitStateTimer = 0;
+
+        npc.stunned = true;
+        ((PromotionGuy)npc).hurt = true;
     }
 
     public override void OnExit()
     {
         npc.aiPath.canMove = true;
+        ((PromotionGuy)npc).hurt = false;
     }
 
     public override void OnUpdate()
@@ -63,7 +67,8 @@ public class PromotionGuy_FreezeFrame : State
                         _hitAngle = 2 * Mathf.PI - _hitAngle;
                     }
 
-                    _hitDirection = (HitDirection)Mathf.RoundToInt(_hitAngle * Mathf.Rad2Deg / _angleDivider);
+                    _hitAngle %= 2 * Mathf.PI;
+                    _hitDirection = (HitDirection)(Mathf.RoundToInt(_hitAngle * Mathf.Rad2Deg / _angleDivider) % 4);
                 }
                 else
                 {
@@ -96,6 +101,7 @@ public class PromotionGuy_FreezeFrame : State
         if (exitStateTimer > exitStateTime)
         {
             npc.spriteRenderer.sprite = npc.idleSprite;
+            npc.stunned = false;
             ServiceLocator.Current.Get<AIManager>().ChangeState(npc, typeof(PromotionGuy_ChaseKid));
         }
     }
