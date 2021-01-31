@@ -249,6 +249,17 @@ public class Player : MonoBehaviour
 
     public void EndPunchAnimation()
     {
+        // if (_punchComboCounter == 2)
+        // {
+        //     _cameraShakeTween.Kill();
+        //     camera.transform.localPosition = Vector3.zero;
+        //     _cameraShakeTween = camera.transform.DOShakePosition(0.25f, Vector3.one * 1.0f, 10, 90, false, true).OnKill(
+        //         () =>
+        //         {
+        //             camera.transform.localPosition = Vector3.zero;
+        //         });
+        // }
+        
         _isPunchFreezeFrameActive = false;
         _isPunchAnimationPlaying = false;
         

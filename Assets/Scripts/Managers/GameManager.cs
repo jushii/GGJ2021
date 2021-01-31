@@ -30,8 +30,11 @@ public class GameManager : MonoBehaviour
     private float _gameTimer = 0.0f;
     private string formattedTime;
 
+    private bool keyPressedOnce = false;
+    
     private void Awake()
     {
+        UIManager.IsCutsceneActive = true;
         _isGameStarted = false;
         isGameOver = false;
         _gameTimer = _gameTime;
@@ -63,9 +66,14 @@ public class GameManager : MonoBehaviour
             SceneManager.LoadScene(0);
         }
         
-        if (!_isGameStarted && Keyboard.current.anyKey.wasPressedThisFrame)
+        if (!UIManager.IsCutsceneActive && !_isGameStarted && Keyboard.current.anyKey.wasPressedThisFrame)
         {
-            StartGame();
+            if (keyPressedOnce)
+            {
+                StartGame();
+            }
+            
+            keyPressedOnce = true;
         }
 
         if (_isGameStarted && !isGameOver)

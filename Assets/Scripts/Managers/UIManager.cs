@@ -4,9 +4,16 @@ using System.Collections.Generic;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour, IGameService
 {
+    public List<Sprite> cutsceneSprites;
+    private int _cutSceneSpriteIndex = 0;
+    public Image cutsceneImage;
+    public GameObject titleScreen;
+    
     [SerializeField] private Canvas uiCanvas;
     [SerializeField] private TextMeshProUGUI kidsCountLabel;
     [SerializeField] private TextMeshProUGUI timerLabel;
@@ -18,11 +25,42 @@ public class UIManager : MonoBehaviour, IGameService
     private Tweener kidCountBounceTweener;
     private EntityManager _entityManager;
 
+    public static bool IsCutsceneActive = true;
+    
     private void Awake()
     {
         uiCanvas.enabled = false;
     }
 
+    private void Update()
+    {
+        if (Keyboard.current.anyKey.wasPressedThisFrame)
+        {
+            int nextCutsceneSpriteIndex = _cutSceneSpriteIndex++;
+            if (nextCutsceneSpriteIndex == cutsceneSprites.Count - 1)
+            {
+                _cutSceneSpriteIndex = nextCutsceneSpriteIndex;
+                EndCutscene();
+            }
+            else
+            {
+                NextCutsceneImage();
+            }
+        }
+    }
+
+    private void NextCutsceneImage()
+    {
+        cutsceneImage.sprite = cutsceneSprites[_cutSceneSpriteIndex];
+    }
+
+    private void EndCutscene()
+    {
+        cutsceneImage.gameObject.SetActive(false);
+        titleScreen.SetActive(true);
+        IsCutsceneActive = false;
+    }
+    
     public void Setup()
     {
         _entityManager = ServiceLocator.Current.Get<EntityManager>();
