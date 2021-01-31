@@ -6,7 +6,6 @@ public class PromotionGuy_RunAwayWithKid : State
     private readonly AIManager _aiManager;
     private EntityManager _entityManager;
     private int _calculateFleePathFrameInterval => 60 * 12;
-    public Kid followerKid;
     
     public PromotionGuy_RunAwayWithKid()
     {
@@ -16,16 +15,15 @@ public class PromotionGuy_RunAwayWithKid : State
     
     public override void OnEnter(object args = null)
     {
-        followerKid = args as Kid;
+        npc.followerKid = args as Kid;
         
-        _aiManager.ChangeState(followerKid, typeof(Kid_FollowPromotionGuy), npc);
+        _aiManager.ChangeState(npc.followerKid, typeof(Kid_FollowPromotionGuy), npc);
         
         CalculateFleePath();
     }
 
     public override void OnExit()
     {
-        followerKid = null;
         // npc.aiPath.maxSpeed = 3;
         npc.ClearPath();
     }

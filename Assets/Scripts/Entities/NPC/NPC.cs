@@ -4,6 +4,15 @@ using Pathfinding;
 using Pathfinding.RVO;
 using UnityEngine;
 
+public enum HitDirection
+{
+    Top,
+    Bottom,
+    Left,
+    Right,
+    None,
+}
+
 public class NPC : MonoBehaviour
 {
     public NPC_BehaviourType behaviourType = NPC_BehaviourType.None;
@@ -69,6 +78,7 @@ public class NPC : MonoBehaviour
     public List<Sprite> bottomHitSprites;
     public List<Sprite> leftHitSprites;
     public List<Sprite> rightHitSprites;
+    public Sprite idleSprite;
 
     public Animator Animator
     {
@@ -86,6 +96,8 @@ public class NPC : MonoBehaviour
         }
     }
 
+    public Kid followerKid;
+
     public virtual void Start()
     {
         ServiceLocator.Current.Get<EntityManager>().RegisterNPC(this);
@@ -100,12 +112,12 @@ public class NPC : MonoBehaviour
         _animator = GetComponent<Animator>();
         CacheAnimatorParameterIds();
 
-        GameManager.onPlayerSpawned += OnPlayerSpawned;
+        // GameManager.onPlayerSpawned += OnPlayerSpawned;
     }
 
-    private void OnPlayerSpawned()
+    public void ResetReceivedHits()
     {
-        ServiceLocator.Current.Get<EntityManager>().players[0].onComboEnd += () => receivedHits = 0;
+        receivedHits = 0;
     }
 
     public void MoveTo(Vector3 position)

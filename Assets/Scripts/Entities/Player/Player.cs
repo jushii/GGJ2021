@@ -416,6 +416,8 @@ public class Player : MonoBehaviour
     
     public Transform GetKidFollowTarget(Kid kid)
     {
+        return transform;
+
         if (_reservedFollowerPositions.TryGetValue(kid, out Transform reservedPosition))
         {
             return reservedPosition;

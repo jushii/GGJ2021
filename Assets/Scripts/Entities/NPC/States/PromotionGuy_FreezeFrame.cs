@@ -11,7 +11,11 @@ public class PromotionGuy_FreezeFrame : State
     private float appliedPunchForce;
     private float exitStateTimer = 0;
     private float exitStateTime = 3;
-    
+
+    private float _hitAngle;
+    private float _angleDivider = 90.0f;
+    private HitDirection _hitDirection;
+
     public override void OnEnter(object args = null)
     {
         isKnockbackApplied = false;
@@ -51,13 +55,47 @@ public class PromotionGuy_FreezeFrame : State
                 var flyNormalDirection = new Vector3(knockBackDir.y, -knockBackDir.x, 0);           // normal vector of flying direction vector                
                 npc.rigidbody2D.AddForce(knockBackDir * (appliedPunchForce * flySpeed) + flyNormalDirection * flyHeight / 3, ForceMode2D.Impulse);
                 
-                // ServiceLocator.Current.Get<AIManager>().ChangeState(npc, typeof(MallWorker_Idle));
+                if (knockBackDir != Vector3.zero)
+                {
+                    _hitAngle = Mathf.Acos(Vector2.Dot(Vector2.right, knockBackDir) / knockBackDir.magnitude);
+                    if (knockBackDir.y < 0)
+                    {
+                        _hitAngle = 2 * Mathf.PI - _hitAngle;
+                    }
+
+                    _hitDirection = (HitDirection)Mathf.RoundToInt(_hitAngle * Mathf.Rad2Deg / _angleDivider);
+                }
+                else
+                {
+                    _hitDirection = HitDirection.None;
+                }
+
+                switch (_hitDirection)
+                {
+                    case HitDirection.Top:
+                        npc.spriteRenderer.sprite = npc.topHitSprites[npc.HitSpriteIndexTop];
+                        break;
+                    case HitDirection.Bottom:
+                        npc.spriteRenderer.sprite = npc.bottomHitSprites[npc.HitSpriteIndexBottom];
+                        break;
+                    case HitDirection.Left:
+                        npc.spriteRenderer.sprite = npc.leftHitSprites[npc.HitSpriteIndexLeft];
+                        break;
+                    case HitDirection.Right:
+                        npc.spriteRenderer.sprite = npc.rightHitSprites[npc.HitSpriteIndexRight];
+                        break;
+                    case HitDirection.None:
+                        npc.spriteRenderer.sprite = npc.idleSprite;
+                        break;
+                }
+
             }
         }
         
         exitStateTimer += (1.0f * Time.deltaTime);
         if (exitStateTimer > exitStateTime)
         {
+            npc.spriteRenderer.sprite = npc.idleSprite;
             ServiceLocator.Current.Get<AIManager>().ChangeState(npc, typeof(PromotionGuy_ChaseKid));
         }
     }

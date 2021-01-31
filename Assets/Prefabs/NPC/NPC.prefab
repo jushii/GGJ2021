@@ -270,6 +270,19 @@ MonoBehaviour:
   receivedHits: 0
   stunned: 0
   spriteRenderer: {fileID: 4160329091790254268}
+  topHitSprites:
+  - {fileID: 21300000, guid: 212d7d5078794734d8edd5edc818ed67, type: 3}
+  - {fileID: 21300000, guid: 4c31e65bd86e18f4da9f4a79fe1d911a, type: 3}
+  bottomHitSprites:
+  - {fileID: 21300000, guid: 6ab06fd7cbc424942ae9b4980dba32db, type: 3}
+  - {fileID: 21300000, guid: 550e7d29288afb04cb5d7b45ed3beb7e, type: 3}
+  leftHitSprites:
+  - {fileID: 21300000, guid: 4a983d297067ca24a9402bc4ef760e0f, type: 3}
+  - {fileID: 21300000, guid: e5cc46a295eadd24fa85d42658a390ff, type: 3}
+  rightHitSprites:
+  - {fileID: 21300000, guid: 7caca5b58ab52e440b0d5ba40cbd17c5, type: 3}
+  - {fileID: 21300000, guid: 712e6902d2d43e144a39a505227b023a, type: 3}
+  idleSprite: {fileID: 21300000, guid: e96e3d2ca19ca4e419ef0672de53394a, type: 3}
 --- !u!58 &509891453053187830
 CircleCollider2D:
   m_ObjectHideFlags: 0
