@@ -67,10 +67,8 @@ public class NormalCustomer_FreezeFrame : State
                 }
                 else
                 {
-                    _hitDirection = HitDirection.None;
+                    _hitDirection = HitDirection.Left;
                 }
-
-                //Debug.Log(_hitDirection);
 
                 switch (_hitDirection)
                 {

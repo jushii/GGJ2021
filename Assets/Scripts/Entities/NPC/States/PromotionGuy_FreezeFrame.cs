@@ -67,7 +67,7 @@ public class PromotionGuy_FreezeFrame : State
                 }
                 else
                 {
-                    _hitDirection = HitDirection.None;
+                    _hitDirection = HitDirection.Left;
                 }
 
                 switch (_hitDirection)
