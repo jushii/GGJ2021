@@ -156,7 +156,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8889701612078544681}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 560112f876f5746c780eca0d404e7139, type: 3}
   m_Name: 
@@ -169,12 +169,12 @@ MonoBehaviour:
   lockWhenNotMoving: 0
   agentTimeHorizon: 0.6
   obstacleTimeHorizon: 0.2
-  maxNeighbours: 20
+  maxNeighbours: 25
   layer: 4
   collidesWith: 4
   wallAvoidForce: 1
   wallAvoidFalloff: 1
-  priority: 0.5
+  priority: 0.25
   debug: 0
 --- !u!114 &2382714331683054039
 MonoBehaviour:
@@ -197,13 +197,13 @@ MonoBehaviour:
   groundMask:
     serializedVersion: 2
     m_Bits: 4294967295
-  endReachedDistance: 3
+  endReachedDistance: 1
   whenCloseToDestination: 0
   rvoDensityBehavior:
     enabled: 0
     densityThreshold: 0
     returnAfterBeingPushedAway: 1
-    progressAverage: 0.98226315
+    progressAverage: 0.9999993
     lastJobDensityResult: 1
   centerOffsetCompatibility: NaN
   repathRateCompatibility: 0.5
@@ -217,10 +217,10 @@ MonoBehaviour:
     maximumInterval: 2
     visualizeSensitivity: 0
   targetCompatibility: {fileID: 0}
-  maxAcceleration: 100
+  maxAcceleration: 80
   rotationSpeed: 360
-  slowdownDistance: 1
-  pickNextWaypointDist: 3
+  slowdownDistance: 5
+  pickNextWaypointDist: 1
   alwaysDrawGizmos: 0
   slowWhenNotFacingTarget: 1
   preventMovingBackwards: 0
@@ -319,6 +319,12 @@ MonoBehaviour:
   spawnPosition: {x: 0, y: 0, z: 0}
   receivedHits: 0
   stunned: 0
+  spriteRenderer: {fileID: 0}
+  topHitSprites: []
+  bottomHitSprites: []
+  leftHitSprites: []
+  rightHitSprites: []
+  followerKid: {fileID: 0}
   kidModelPivot: {fileID: 8427556652193949440}
   kidAnimator: {fileID: 0}
   kidModelPrefabs:

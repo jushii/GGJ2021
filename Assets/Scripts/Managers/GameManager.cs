@@ -65,6 +65,13 @@ public class GameManager : MonoBehaviour
             ServiceLocator.Current.Get<EntityManager>().RegisterPlayer(p);
             onPlayerSpawned?.Invoke();
 
+            foreach (NPC npc in entityManager.npcs)
+            {
+                if (npc is Kid) continue;
+
+                entityManager.players[0].onComboEnd += npc.ResetReceivedHits;
+            }
+            
             idleCam.enabled = false;
             uiManager.OnStartGame();
         });

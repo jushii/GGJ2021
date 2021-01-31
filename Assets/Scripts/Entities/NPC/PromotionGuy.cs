@@ -15,11 +15,11 @@ public class PromotionGuy : NPC
 
     public override void OnStartPunch()
     {
-        if (state.GetType() == typeof(PromotionGuy_RunAwayWithKid))
+        if (followerKid != null)
         {
-            PromotionGuy_RunAwayWithKid runAwayState = state as PromotionGuy_RunAwayWithKid;
-            Kid kid = runAwayState.followerKid;
+            Kid kid = followerKid;
             aiManager.ChangeState(kid, typeof(Kid_FollowPlayer), ServiceLocator.Current.Get<EntityManager>().players[0]);
+            followerKid = null;
         }
 
         aiPath.canMove = false;
