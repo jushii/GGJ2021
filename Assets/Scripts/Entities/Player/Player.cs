@@ -76,6 +76,8 @@ public class Player : MonoBehaviour
 
     public void SetInputVector(Vector2 dir)
     {
+        if (GameManager.isGameOver) return;
+
         _inputVector = dir;
 
         if (dir.magnitude != 0.0f)
@@ -90,6 +92,8 @@ public class Player : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (GameManager.isGameOver) return;
+        
         UpdateMovementSpeed();
         UpdatePunchFrameTimer();
 

@@ -2,6 +2,7 @@ using System;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -21,14 +22,20 @@ public class GameManager : MonoBehaviour
 
     public static Action onPlayerSpawned;
     public static Action<string> gameTimeChanged;
-     
+    public static Action onGameOver;
+    public static bool isGameOver = false;
+    
     public bool _isGameStarted;
-    private float _gameTime = 120.0f;
+    private float _gameTime = 125.0f;
     private float _gameTimer = 0.0f;
     private string formattedTime;
 
     private void Awake()
     {
+        _isGameStarted = false;
+        isGameOver = false;
+        _gameTimer = _gameTime;
+
         ServiceLocator.Initialize();
         
         // Register all game services.
@@ -46,12 +53,22 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
+        if (Keyboard.current.escapeKey.IsPressed())
+        {
+            Application.Quit();
+        }
+        
+        if (Keyboard.current.rKey.IsPressed())
+        {
+            SceneManager.LoadScene(0);
+        }
+        
         if (!_isGameStarted && Keyboard.current.anyKey.wasPressedThisFrame)
         {
             StartGame();
         }
 
-        if (_isGameStarted)
+        if (_isGameStarted && !isGameOver)
         {
             _gameTimer -= Time.deltaTime;
             string fTime = GetFormattedTime(_gameTimer);
@@ -60,6 +77,14 @@ public class GameManager : MonoBehaviour
                 formattedTime = fTime;
                 gameTimeChanged?.Invoke(formattedTime);
             }
+
+            if (_gameTimer <= 0)
+            {
+                gameTimeChanged?.Invoke("0:00");
+
+                isGameOver = true;
+                onGameOver?.Invoke();
+            }
         }
     }
 
@@ -67,16 +92,14 @@ public class GameManager : MonoBehaviour
     {
         _isGameStarted = true;
 
-        titleCanvas.GetComponent<CanvasGroup>().DOFade(0.0f, 1.0f);
+        titleCanvas.GetComponent<CanvasGroup>().DOFade(0.0f, 0.5f);
         
         Sequence startSequence = DOTween.Sequence();
-        startSequence.Insert(0, idleCam.DOOrthoSize(8.0f, 1.0f));
-        startSequence.Insert(0, idleCam.transform.DOMoveX(playerSpawn.transform.position.x, 1.0f));
-        startSequence.Insert(0, idleCam.transform.DOMoveY(playerSpawn.transform.position.y, 1.0f));
+        startSequence.Insert(0, idleCam.DOOrthoSize(8.0f, 0.5f));
+        startSequence.Insert(0, idleCam.transform.DOMoveX(playerSpawn.transform.position.x, 0.5f));
+        startSequence.Insert(0, idleCam.transform.DOMoveY(playerSpawn.transform.position.y, 0.5f));
         startSequence.OnKill(() =>
         {
-            _gameTimer = _gameTime;
-            
             GameObject player = Instantiate(playerPrefab, playerSpawn.transform.position, Quaternion.identity);
             Player p = player.GetComponent<Player>();
             ServiceLocator.Current.Get<EntityManager>().RegisterPlayer(p);

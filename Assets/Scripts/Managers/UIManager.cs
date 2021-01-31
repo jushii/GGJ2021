@@ -12,6 +12,8 @@ public class UIManager : MonoBehaviour, IGameService
     [SerializeField] private TextMeshProUGUI timerLabel;
     [SerializeField] private Transform kidsPanel;
     [SerializeField] private Transform timerPanel;
+    [SerializeField] private TextMeshProUGUI scoreLabel;
+    [SerializeField] private GameObject endScreen;
     
     private Tweener kidCountBounceTweener;
     private EntityManager _entityManager;
@@ -25,6 +27,13 @@ public class UIManager : MonoBehaviour, IGameService
     {
         _entityManager = ServiceLocator.Current.Get<EntityManager>();
         GameManager.gameTimeChanged += OnGameTimeChanged;
+        GameManager.onGameOver += OnGameOver;
+    }
+
+    private void OnGameOver()
+    {
+        endScreen.gameObject.SetActive(true);
+        scoreLabel.text = $"YOU SAVED {ServiceLocator.Current.Get<EntityManager>().players[0].followers.Count} KIDS! GREAT JOB!";
     }
 
     private void OnGameTimeChanged(string obj)

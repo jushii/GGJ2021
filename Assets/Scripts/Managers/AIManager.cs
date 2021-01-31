@@ -8,6 +8,8 @@ public class AIManager :  MonoBehaviour, IGameService
     private readonly Dictionary<NPC_BehaviourType, NPC_GenerationParameters> _generationParameters = new Dictionary<NPC_BehaviourType, NPC_GenerationParameters>();
     private EntityManager _entityManager;
 
+    private bool _isAiStopped = false;
+    
     public void Setup()
     {
         _entityManager = ServiceLocator.Current.Get<EntityManager>();
@@ -82,6 +84,19 @@ public class AIManager :  MonoBehaviour, IGameService
     
     private void Update()
     {
+        if (GameManager.isGameOver)
+        {
+            if (!_isAiStopped)
+            {
+                foreach (NPC npc in _entityManager.npcs)
+                {
+                    npc.aiPath.enabled = false;
+                }
+            }
+            
+            return;
+        }
+        
         HandleUpdate();
         HandleTransitions();
     }
