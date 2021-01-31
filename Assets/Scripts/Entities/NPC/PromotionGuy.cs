@@ -1,6 +1,11 @@
-﻿
+﻿using System.Collections.Generic; 
+using UnityEngine;
+
 public class PromotionGuy : NPC
 {
+    public List<Sprite> speechBubbleSprites;
+    public bool hurt;
+
     public override void Start()
     {
         ServiceLocator.Current.Get<EntityManager>().RegisterNPC(this);
@@ -11,6 +16,7 @@ public class PromotionGuy : NPC
         aiManager.SetupNPC(this);
 
         stunned = false;
+        hurt = false;
     }
 
     public override void OnStartPunch()

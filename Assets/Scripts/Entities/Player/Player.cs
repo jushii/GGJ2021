@@ -318,17 +318,16 @@ public class Player : MonoBehaviour
                 _lookAngle = 2 * Mathf.PI - _lookAngle;
             }
 
-            _lookDirection = (LookDirection) Mathf.RoundToInt(_lookAngle * Mathf.Rad2Deg / _angleDivider);
+            _lookDirection = (LookDirection) (Mathf.RoundToInt(_lookAngle * Mathf.Rad2Deg / _angleDivider) % 8);
         }
         else
         {
             _lookDirection = LookDirection.None;
         }
-        
+
         // Debug.Log(_lookDirection);
         // Debug.Log("is freeze frame active " + _isPunchFreezeFrameActive);
 
-        // Debug.Log(_lookDirection);
         switch (_lookDirection)
         {
             case LookDirection.Left:

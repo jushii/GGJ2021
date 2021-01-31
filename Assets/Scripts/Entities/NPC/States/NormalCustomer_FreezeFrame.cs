@@ -37,6 +37,8 @@ public class NormalCustomer_FreezeFrame : State
         npc.aiPath.canMove = false;
         knockbackTimer = Time.frameCount;
         exitStateTimer = 0;
+
+        npc.stunned = true;
     }
 
     public override void OnExit()
@@ -63,14 +65,13 @@ public class NormalCustomer_FreezeFrame : State
                         _hitAngle = 2 * Mathf.PI - _hitAngle;
                     }
 
-                    _hitDirection = (HitDirection) Mathf.RoundToInt(_hitAngle * Mathf.Rad2Deg / _angleDivider);
+                    _hitAngle %= 2 * Mathf.PI;
+                    _hitDirection = (HitDirection) (Mathf.RoundToInt(_hitAngle * Mathf.Rad2Deg / _angleDivider) % 4);
                 }
                 else
                 {
-                    _hitDirection = HitDirection.None;
+                    _hitDirection = HitDirection.Left;
                 }
-
-                //Debug.Log(_hitDirection);
 
                 switch (_hitDirection)
                 {
@@ -97,6 +98,7 @@ public class NormalCustomer_FreezeFrame : State
         if (exitStateTimer > exitStateTime)
         {
             npc.spriteRenderer.sprite = npc.idleSprite;
+            npc.stunned = false;
             ServiceLocator.Current.Get<AIManager>().ChangeState(npc, typeof(NormalCustomer_Idle));
         }
     }

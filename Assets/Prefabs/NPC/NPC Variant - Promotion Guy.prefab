@@ -36,6 +36,16 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 7caca5b58ab52e440b0d5ba40cbd17c5, type: 3}
   - {fileID: 21300000, guid: 712e6902d2d43e144a39a505227b023a, type: 3}
   idleSprite: {fileID: 21300000, guid: e96e3d2ca19ca4e419ef0672de53394a, type: 3}
+  followerKid: {fileID: 0}
+  speechBubbleSprites:
+  - {fileID: 21300000, guid: a7be585f277b9e344999ac55d39778b2, type: 3}
+  - {fileID: 21300000, guid: ed9473f6c6890ff4ea392630bf753e05, type: 3}
+  - {fileID: 21300000, guid: 6e248c977036b9842a972d98fb056795, type: 3}
+  - {fileID: 21300000, guid: d895dd9cfaffebc42b28a54ef0e88fad, type: 3}
+  - {fileID: 21300000, guid: cd30a527cc6c92d4089bae4913924ac6, type: 3}
+  - {fileID: 21300000, guid: 2dc30f62f229e754c94e8b5801024cf2, type: 3}
+  - {fileID: 21300000, guid: de093407d98a8684ebb58f7933dba9fb, type: 3}
+  - {fileID: 21300000, guid: 00ec348baf561784581c6b1555da125f, type: 3}
 --- !u!1001 &7993739081960475519
 PrefabInstance:
   m_ObjectHideFlags: 0

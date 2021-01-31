@@ -6,11 +6,11 @@ using UnityEngine;
 
 public enum HitDirection
 {
-    Top,
-    Bottom,
-    Left,
     Right,
-    None,
+    Top,
+    Left,
+    Bottom,
+    None
 }
 
 public class NPC : MonoBehaviour

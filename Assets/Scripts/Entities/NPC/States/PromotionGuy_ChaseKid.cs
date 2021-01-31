@@ -10,11 +10,17 @@ public class PromotionGuy_ChaseKid : State
     private Kid _followedKid;
     private Collider2D[] foundKid = new Collider2D[1];
 
+    private float speechBubbleTimer = 0;
+    private float speechBubbleTime;
+    private int speechBubbleIndex;
+
     public PromotionGuy_ChaseKid()
     {
         _aiManager = ServiceLocator.Current.Get<AIManager>();
         _entityManager = ServiceLocator.Current.Get<EntityManager>();
         _promotionGuyManager = ServiceLocator.Current.Get<PromotionGuyManager>();
+
+        speechBubbleTime = Random.Range(3, 6);
     }
     
     public override void OnEnter(object args = null)
@@ -31,6 +37,31 @@ public class PromotionGuy_ChaseKid : State
 
     public override void OnUpdate()
     {
+        // TODO: SPEECH BUBBLE!!!!!
+        speechBubbleTimer += (1.0f * Time.deltaTime);
+        if (speechBubbleTimer > speechBubbleTime)
+        {
+            GameObject speechBubbleObject = new GameObject("SpeechBubble");
+            speechBubbleObject.transform.parent = npc.gameObject.transform;
+            speechBubbleObject.transform.localPosition = new Vector3(0.2f, 4f, 0f);
+            speechBubbleObject.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+            SpriteRenderer spriteRenderer = speechBubbleObject.AddComponent<SpriteRenderer>();
+
+            speechBubbleIndex = Random.Range(0, ((PromotionGuy)npc).speechBubbleSprites.Count - 1);
+            spriteRenderer.sprite = ((PromotionGuy)npc).speechBubbleSprites[speechBubbleIndex];
+
+            if (((PromotionGuy)npc).hurt)
+            {
+                Object.Destroy(speechBubbleObject);
+            }
+            else
+            {
+                Object.Destroy(speechBubbleObject, 2);
+            }
+
+            speechBubbleTimer = 0.0f;
+        }
+
         if (_followedKid != null && _followedKid.isRescued)
         {
             _followedKid = null;
