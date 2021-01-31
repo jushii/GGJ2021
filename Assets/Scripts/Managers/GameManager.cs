@@ -20,9 +20,13 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Canvas titleCanvas;
 
     public static Action onPlayerSpawned;
-    
+    public static Action<string> gameTimeChanged;
+     
     public bool _isGameStarted;
-    
+    private float _gameTime = 120.0f;
+    private float _gameTimer = 0.0f;
+    private string formattedTime;
+
     private void Awake()
     {
         ServiceLocator.Initialize();
@@ -46,6 +50,17 @@ public class GameManager : MonoBehaviour
         {
             StartGame();
         }
+
+        if (_isGameStarted)
+        {
+            _gameTimer -= Time.deltaTime;
+            string fTime = GetFormattedTime(_gameTimer);
+            if (!string.Equals(formattedTime, fTime))
+            {
+                formattedTime = fTime;
+                gameTimeChanged?.Invoke(formattedTime);
+            }
+        }
     }
 
     private void StartGame()
@@ -60,13 +75,29 @@ public class GameManager : MonoBehaviour
         startSequence.Insert(0, idleCam.transform.DOMoveY(playerSpawn.transform.position.y, 1.0f));
         startSequence.OnKill(() =>
         {
+            _gameTimer = _gameTime;
+            
             GameObject player = Instantiate(playerPrefab, playerSpawn.transform.position, Quaternion.identity);
             Player p = player.GetComponent<Player>();
             ServiceLocator.Current.Get<EntityManager>().RegisterPlayer(p);
             onPlayerSpawned?.Invoke();
 
+            foreach (NPC npc in entityManager.npcs)
+            {
+                if (npc is Kid) continue;
+
+                entityManager.players[0].onComboEnd += npc.ResetReceivedHits;
+            }
+            
             idleCam.enabled = false;
             uiManager.OnStartGame();
         });
+    }
+    
+    private string GetFormattedTime(float timer)
+    {
+        int minutes = Mathf.FloorToInt(timer / 60F);
+        int seconds = Mathf.FloorToInt(timer - minutes * 60);
+        return $"{minutes:0}:{seconds:00}";
     }
 }

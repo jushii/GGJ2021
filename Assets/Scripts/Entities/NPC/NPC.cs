@@ -96,6 +96,8 @@ public class NPC : MonoBehaviour
         }
     }
 
+    public Kid followerKid;
+
     public virtual void Start()
     {
         ServiceLocator.Current.Get<EntityManager>().RegisterNPC(this);
@@ -110,12 +112,12 @@ public class NPC : MonoBehaviour
         _animator = GetComponent<Animator>();
         CacheAnimatorParameterIds();
 
-        GameManager.onPlayerSpawned += OnPlayerSpawned;
+        // GameManager.onPlayerSpawned += OnPlayerSpawned;
     }
 
-    private void OnPlayerSpawned()
+    public void ResetReceivedHits()
     {
-        ServiceLocator.Current.Get<EntityManager>().players[0].onComboEnd += () => receivedHits = 0;
+        receivedHits = 0;
     }
 
     public void MoveTo(Vector3 position)
