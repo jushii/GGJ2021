@@ -65,6 +65,8 @@ public class Player : MonoBehaviour
     private int _punchComboCounter;
     private bool _isPunchAnimationPlaying;
     private List<NPC> _punchedNPCs = new List<NPC>();
+
+    public Action onComboEnd;
     
     private void Start()
     {
@@ -231,11 +233,11 @@ public class Player : MonoBehaviour
         {
             punchedNPC.OnEndPunch();
         }
-
+        
         _punchedNPCs.Clear();
         
         // If we have tapped punch button during the previous punch. Do automatic another punch.
-        if (_automaticPunchQueued)
+        if (_automaticPunchQueued && _punchComboCounter < 3)
         {
             Punch();
         }
@@ -245,11 +247,13 @@ public class Player : MonoBehaviour
     {
         _isPunchFreezeFrameActive = false;
         _isPunchAnimationPlaying = false;
-
+        
         // _animator.SetTrigger("Idle");
       
         RunAnimation();
         _punchComboCounter = 0;
+        
+        onComboEnd?.Invoke();
     }
 
     private void UpdateMovementSpeed()
@@ -306,10 +310,10 @@ public class Player : MonoBehaviour
             _lookDirection = LookDirection.None;
         }
         
-        Debug.Log(_lookDirection);
-        Debug.Log("is freeze frame active " + _isPunchFreezeFrameActive);
+        // Debug.Log(_lookDirection);
+        // Debug.Log("is freeze frame active " + _isPunchFreezeFrameActive);
 
-        Debug.Log(_lookDirection);
+        // Debug.Log(_lookDirection);
         switch (_lookDirection)
         {
             case LookDirection.Left:
