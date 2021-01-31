@@ -45,6 +45,7 @@ public class AIManager :  MonoBehaviour, IGameService
         promotionGuy.availableStates.Add(typeof(PromotionGuy_ChaseKid));
         promotionGuy.availableStates.Add(typeof(PromotionGuy_RunAwayWithKid));
         promotionGuy.availableStates.Add(typeof(PromotionGuy_Fly));
+        promotionGuy.availableStates.Add(typeof(PromotionGuy_FreezeFrame));
 
         _generationParameters.Add(NPC_BehaviourType.Consumer, consumer);
         _generationParameters.Add(NPC_BehaviourType.NormalCustomer, normalCustomer);

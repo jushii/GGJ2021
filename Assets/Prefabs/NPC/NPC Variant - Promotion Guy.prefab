@@ -20,6 +20,8 @@ MonoBehaviour:
   rigidbody2D: {fileID: 3834733134489476951}
   aiManager: {fileID: 0}
   spawnPosition: {x: 0, y: 0, z: 0}
+  receivedHits: 0
+  stunned: 0
 --- !u!1001 &7993739081960475519
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -37,11 +39,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9163449290651758, guid: aa6dcc2d0c8ec74439c68b2c70ce2f36, type: 3}
       propertyPath: maxSpeed
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 9163449290651758, guid: aa6dcc2d0c8ec74439c68b2c70ce2f36, type: 3}
       propertyPath: maxAcceleration
-      value: 30
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 4160329091790254268, guid: aa6dcc2d0c8ec74439c68b2c70ce2f36, type: 3}
       propertyPath: m_Color.b

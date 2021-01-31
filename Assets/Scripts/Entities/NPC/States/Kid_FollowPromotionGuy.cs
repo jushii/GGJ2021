@@ -10,6 +10,9 @@ public class Kid_FollowPromotionGuy : State
     
     public override void OnEnter(object args = null)
     {
+        Kid k = npc as Kid;
+        k.PlayWalkAnimation();
+        
         _followedPromotionGuy = args as PromotionGuy;
         npc.StartFollowing(_followedPromotionGuy.transform);
     }

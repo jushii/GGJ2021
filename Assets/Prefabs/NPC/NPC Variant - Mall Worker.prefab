@@ -39,6 +39,7 @@ MonoBehaviour:
   rigidbody2D: {fileID: 5635585466911776118}
   aiManager: {fileID: 0}
   spawnPosition: {x: 0, y: 0, z: 0}
+  receivedHits: 0
   stunned: 0
 --- !u!1001 &1580021573574871390
 PrefabInstance:
@@ -57,7 +58,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9163449290651758, guid: aa6dcc2d0c8ec74439c68b2c70ce2f36, type: 3}
       propertyPath: maxSpeed
-      value: 5
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 509891453053187830, guid: aa6dcc2d0c8ec74439c68b2c70ce2f36, type: 3}
       propertyPath: m_Radius
@@ -69,11 +70,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4160329091790254268, guid: aa6dcc2d0c8ec74439c68b2c70ce2f36, type: 3}
       propertyPath: m_Color.g
-      value: 0.4494347
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4160329091790254268, guid: aa6dcc2d0c8ec74439c68b2c70ce2f36, type: 3}
       propertyPath: m_Color.r
-      value: 0.18396229
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6516432204732116624, guid: aa6dcc2d0c8ec74439c68b2c70ce2f36, type: 3}
       propertyPath: m_Name

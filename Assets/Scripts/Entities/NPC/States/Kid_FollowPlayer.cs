@@ -17,6 +17,9 @@ public class Kid_FollowPlayer : State
     
     public override void OnEnter(object args = null)
     {
+        Kid k = npc as Kid;
+        k.PlayWalkAnimation();
+        
         if (args is Player player)
         {
             _followedPlayer = player;
