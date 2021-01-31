@@ -48,6 +48,7 @@ public class PromotionGuy_ChaseKid : State
             SpriteRenderer spriteRenderer = speechBubbleObject.AddComponent<SpriteRenderer>();
 
             speechBubbleIndex = Random.Range(0, ((PromotionGuy)npc).speechBubbleSprites.Count - 1);
+            spriteRenderer.sortingOrder = 15;
             spriteRenderer.sprite = ((PromotionGuy)npc).speechBubbleSprites[speechBubbleIndex];
 
             if (((PromotionGuy)npc).hurt)

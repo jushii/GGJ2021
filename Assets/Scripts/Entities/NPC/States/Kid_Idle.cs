@@ -38,6 +38,7 @@ public class Kid_Idle : State
             SpriteRenderer spriteRenderer = speechBubbleObject.AddComponent<SpriteRenderer>();
 
             speechBubbleIndex = Random.Range(0, ((Kid)npc).speechBubbleSprites.Count - 1);
+            spriteRenderer.sortingOrder = 15;
             spriteRenderer.sprite = ((Kid)npc).speechBubbleSprites[speechBubbleIndex];
 
             Object.Destroy(speechBubbleObject, 2);
