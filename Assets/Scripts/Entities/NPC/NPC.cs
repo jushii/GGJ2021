@@ -4,6 +4,15 @@ using Pathfinding;
 using Pathfinding.RVO;
 using UnityEngine;
 
+public enum HitDirection
+{
+    Top,
+    Bottom,
+    Left,
+    Right,
+    None,
+}
+
 public class NPC : MonoBehaviour
 {
     public NPC_BehaviourType behaviourType = NPC_BehaviourType.None;
@@ -69,6 +78,7 @@ public class NPC : MonoBehaviour
     public List<Sprite> bottomHitSprites;
     public List<Sprite> leftHitSprites;
     public List<Sprite> rightHitSprites;
+    public Sprite idleSprite;
 
     public Animator Animator
     {
